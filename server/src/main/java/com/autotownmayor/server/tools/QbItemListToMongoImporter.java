@@ -10,7 +10,7 @@ import com.autotownmayor.server.repository.SalesItemRepository;
 //TODO: Find a way to filter values during the deserialization process(Ex. Ignore values w/ percentatges in the price column)
 
 public class QbItemListToMongoImporter {
-	public void shit(SalesItemRepository repository, String fileName){
+	public void importFromCsv(SalesItemRepository repository, String fileName){
 		CsvDataLoader cdl = new CsvDataLoader();
 		List<SalesItemEntity> items = cdl.loadObjectList(SalesItemEntity.class, fileName);
 		repository.saveAll(items);
