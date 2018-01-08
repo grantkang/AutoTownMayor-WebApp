@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+  <button mat-button (click)="sidenav.toggle()">
+    <mat-icon>list</mat-icon>
+  </button>
+  <button mat-button routerLink='./promo' routerLinkActive="active">
+    <img width="35" src="../assets/images/ATM_logo.png"/><b style="font-family:Eras ITC;font-size:150%">{{title}}</b>
+  </button>
+  <button mat-button routerLink="/products" routerLinkActive="active">
+    Products
+  </button>
+  <button mat-button routerLink="/about" routerLinkActive="active">
+    About Us
+  </button>
+</mat-toolbar> 
