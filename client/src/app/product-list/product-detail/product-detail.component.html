@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{(productState | async).currentProduct.name}}</mat-card-title>
+    <mat-card-subtitle>Inventory Type Placeholder</mat-card-subtitle>
+  </mat-card-header>
+  <img src="https://www.theyearinpictures.co.uk/images//image-placeholder.png" alt="PlaceholderImg">
+  <mat-card-content>
+    <p>{{(productState | async).currentProduct.description}}</p>
+  </mat-card-content>
+</mat-card>

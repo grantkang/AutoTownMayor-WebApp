@@ -1,0 +1,36 @@
+<span>Our products</span>
+<!-- <form class="form-horizontal" [formGroup]="itemsearch" (ngSubmit)="onSubmit(itemsearch)">
+
+</form> -->
+<div>
+  <!-- <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field> -->
+  <mat-table #table [dataSource]="(productState | async).pageableProductList.salesItems">
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelectElement(row)" style="cursor: pointer;"></mat-row>
+    
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.price | currency}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <mat-header-cell *matHeaderCellDef> Qty. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.quantity}} </mat-cell>
+    </ng-container>
+
+
+  </mat-table>
+  <mat-paginator
+    [pageSize]="(productState | async).pageableProductList.size"
+    [pageIndex]="(productState | async).pageableProductList.number"
+    [length]="(productState | async).pageableProductList.totalElements"
+    (page)="onNextPage($event)">
+  </mat-paginator>
+</div>
