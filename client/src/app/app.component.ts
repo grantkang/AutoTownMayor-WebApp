@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 
 
@@ -10,5 +10,6 @@ import { Observable } from 'rxjs/Rx';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = 'Auto Town Mayor';
+  isLoggedIn = false;
 }

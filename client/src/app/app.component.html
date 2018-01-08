@@ -1,20 +1,19 @@
-<!--The whole content below can be removed with the new code.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!!
-  </h1>
-  <img width="300" src="../assets/images/ATM_logo.png" />
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" href="https://angular.io/docs/ts/latest/tutorial/">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="http://angularjs.blogspot.ca/">Angular blog</a></h2>
-  </li>
-</ul>
+<app-header></app-header>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side">
+    <mat-nav-list *ngIf="!isLoggedIn">
+      <mat-list-item> Login </mat-list-item>
+    </mat-nav-list>
+    <mat-nav-list *ngIf="isLoggedIn">
+      <mat-list-item> Account Balance </mat-list-item>
+      <mat-list-item> Orders </mat-list-item>
+      <mat-list-item> Log Out </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <div style="text-align:center;height:100%">
+    <router-outlet>
 
+    </router-outlet>
+  </div>
+</mat-sidenav-container>
+<app-footer></app-footer>
