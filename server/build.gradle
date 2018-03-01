@@ -31,14 +31,14 @@ repositories {
 
 dependencies {
 	compile group: 'org.apache.axis', name: 'axis', version: '1.4'
-    compile 'org.springframework.session:spring-session-data-mongodb:2.0.0.BUILD-SNAPSHOT'
-	compile('org.springframework.boot:spring-boot-starter-actuator')
+	//compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
 	compile('org.springframework.boot:spring-boot-starter-mail')
-	//compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.boot:spring-boot-starter-web-services')
+	//compile('org.springframework.boot:spring-boot-starter-web-services')
 	compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-csv', version: '2.9.2'
+	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.0'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-	testCompile('org.springframework.security:spring-security-test')
+	//testCompile('org.springframework.security:spring-security-test')
 }
