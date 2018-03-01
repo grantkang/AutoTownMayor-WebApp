@@ -1,0 +1,18 @@
+
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="start center">
+  <mat-toolbar color="primary">
+    <span>Contact Us</span>
+  </mat-toolbar>
+  <mat-form-field>
+    <input matInput id="email" formControlName="email" placeholder="E-mail" type="email">
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput id="message" formControlName="message" placeholder="Message"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput id="captcha" formControlName="captcha" placeholder="Fake Captcha" type="text">
+  </mat-form-field>
+  <button mat-raised-button type="submit" color="primary" [disabled]="!contactForm.valid">
+    Submit
+  </button>
+</form>
