@@ -15,6 +15,8 @@ import { ProductsModule } from './product-list/product-list.module';
 import { PromoModule } from './promo/promo.module';
 import { CompanyInfoModule } from './company-info/company-info.module';
 import { SharedModule } from './shared/shared.module';
+import { LoginComponent } from './auth/login/login.component';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -22,8 +24,10 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     AppRoutingModule,
+    AuthModule,
     BrowserModule,
     BrowserAnimationsModule,
+    CompanyInfoModule,
     CoreModule,
     HttpModule,
     HttpClientModule,
@@ -32,7 +36,6 @@ import { SharedModule } from './shared/shared.module';
     EffectsModule.forRoot([]),
     ProductsModule,
     PromoModule,
-    CompanyInfoModule
   ],
   providers: [],
   bootstrap: [AppComponent]
