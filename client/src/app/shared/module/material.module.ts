@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { CdkTableModule } from '@angular/cdk/table';
 import {
   MatButtonModule,
+  MatDialogModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
   MatPaginatorModule,
   MatSidenavModule,
+  MatSnackBarModule,
   MatTableModule,
   MatToolbarModule
 } from '@angular/material';
@@ -22,11 +24,13 @@ import {
       CdkTableModule,
       MatButtonModule,
       MatCardModule,
+      MatDialogModule,
       MatIconModule,
       MatInputModule,
       MatListModule,
       MatPaginatorModule,
       MatSidenavModule,
+      MatSnackBarModule,
       MatTableModule,
       MatToolbarModule
     ],
@@ -34,11 +38,13 @@ import {
       CdkTableModule,
       MatButtonModule,
       MatCardModule,
+      MatDialogModule,
       MatInputModule,
       MatIconModule,
       MatListModule,
       MatPaginatorModule,
       MatSidenavModule,
+      MatSnackBarModule,
       MatTableModule,
       MatToolbarModule
     ]
