@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <button mat-button (click)="sidenav.toggle()">
+  <button mat-button>
     <mat-icon>list</mat-icon>
   </button>
   <button mat-button routerLink='./promo' routerLinkActive="active">
@@ -11,4 +11,8 @@
   <button mat-button routerLink="/about" routerLinkActive="active">
     About Us
   </button>
-</mat-toolbar> 
+  <div fxFlex="" fxFlexAlign="end end" style="text-align: right; font-size:75%">
+      <span *ngIf="!(authState | async).authenticated" routerLink="/login" style="cursor: pointer;">Login</span>
+      <span *ngIf="(authState | async).authenticated" style="cursor: pointer;" (click)="onLogout()">Logout</span>
+  </div>
+</mat-toolbar>
