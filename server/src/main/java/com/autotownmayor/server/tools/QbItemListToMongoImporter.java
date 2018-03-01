@@ -14,12 +14,5 @@ public class QbItemListToMongoImporter {
 		CsvDataLoader cdl = new CsvDataLoader();
 		List<SalesItemEntity> items = cdl.loadObjectList(SalesItemEntity.class, fileName);
 		repository.saveAll(items);
-		// fetch all items
-		System.out.println("Items found with findByType('Inventory Part'):");
-		System.out.println("-------------------------------");
-		for (SalesItemEntity item : repository.findByType("Inventory Part")) {
-			System.out.println(item);
-		}
-		System.out.println();
 	}
 }
