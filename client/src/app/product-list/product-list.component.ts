@@ -12,6 +12,7 @@ import { SalesItem } from '../shared/model/salesitem.model';
 
 import * as ProductActions from './store/product.actions';
 import * as fromProduct from './store/product.reducers';
+import * as fromApp from '../store/app.reducers';
 
 @Component({
   selector: 'app-product-list',
@@ -23,6 +24,7 @@ export class ProductListComponent implements OnInit {
   currentPage: number;
   displayedColumns = ['name', 'price', 'quantity'];
   productState: Observable<fromProduct.State>;
+  appState: Observable<fromApp.AppState>;
 
   constructor(private store: Store<fromProduct.FeatureState>,
               private route: ActivatedRoute,
@@ -51,10 +53,10 @@ export class ProductListComponent implements OnInit {
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: {page: event['pageIndex']} });
   }
 
-  onSubmit({ value, valid }: { value: ItemSearch, valid: boolean }) {
+  // onSubmit({ value, valid }: { value: ItemSearch, valid: boolean }) {
 
-  }
+  // }
 }
 
-export interface ItemSearch {
-}
+// export interface ItemSearch {
+// }

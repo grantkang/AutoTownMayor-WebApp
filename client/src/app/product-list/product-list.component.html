@@ -9,7 +9,7 @@
   <mat-table #table [dataSource]="(productState | async).pageableProductList.salesItems">
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelectElement(row)" style="cursor: pointer;"></mat-row>
-    
+
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
@@ -17,7 +17,7 @@
 
     <ng-container matColumnDef="price">
       <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.price | currency}} </mat-cell>
+      <mat-cell *matCellDef="let element">{{element.price | currency}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="quantity">

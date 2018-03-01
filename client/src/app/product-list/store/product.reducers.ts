@@ -15,7 +15,8 @@ export interface State {
 }
 
 const initialState = {
-  pageableProductList: new PageableProductList(new MatTableDataSource([]), 0, 0, true, true, 0, 0)
+  pageableProductList: {},
+  currentProduct: {}
 }
 
 export function productReducer(state = initialState, action: ProductActions.ProductActions) {
@@ -29,7 +30,7 @@ export function productReducer(state = initialState, action: ProductActions.Prod
         return {
           ...state,
           currentProduct: action.payload
-        }
+        };
       default:
         return state;
   }

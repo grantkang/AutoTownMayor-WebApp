@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+
 import { PageableProductList } from '../product-list-pageable.model';
 import { SalesItem } from '../../shared/model/salesitem.model';
 

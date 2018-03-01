@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material';
 import { Actions, Effect } from '@ngrx/effects';
 
@@ -8,6 +8,7 @@ import * as ProductActions from './product.actions';
 import * as fromProduct from './product.reducers';
 import { PageableProductList } from '../product-list-pageable.model';
 import { SalesItem } from '../../shared/model/salesitem.model';
+import { AppConstant } from '../../app.constant';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -19,8 +20,12 @@ export class ProductEffects {
   pageableProductListFetch = this.actions$
     .ofType(ProductActions.FETCH_PAGEABLE_PRODUCT_LIST)
     .switchMap((action: ProductActions.FetchPageableProductList) => {
-      return this.httpClient.get<PageableProductList>(this.baseURL + this.itemsURL + action.payload);
-    }).map(
+      const pageNumber = action.payload.toString();
+      const requestURL = AppConstant.BASE_URL + AppConstant.ITEMS_URL;
+      const param = new HttpParams().set('page', pageNumber);
+      return this.httpClient.get<PageableProductList>(requestURL, {params: param});
+    })
+    .map(
       (response) => {
         const salesItems: MatTableDataSource<SalesItem[]> = new MatTableDataSource(response['content']);
         const totalPages: number = response['totalPages'];
@@ -47,7 +52,7 @@ export class ProductEffects {
   productFetchById = this.actions$
     .ofType(ProductActions.FETCH_PRODUCT_BY_ID)
     .switchMap((action: ProductActions.FetchPageableProductList) => {
-      return this.httpClient.get<SalesItem>(this.baseURL + this.itemURL + action.payload);
+      return this.httpClient.get<SalesItem>(AppConstant.BASE_URL + AppConstant.ITEM_URL + action.payload);
     }).map(
       (response) => {
         return {
@@ -57,10 +62,6 @@ export class ProductEffects {
       }
     );
 
-
-  baseURL = 'http://localhost:8080'; // TODO: During production stages change this to the proper backend URL.
-  itemsURL = '/items/v1/?page=';
-  itemURL = '/items/v1/item/'
   constructor(private actions$: Actions,
     private httpClient: HttpClient) {}
 }
