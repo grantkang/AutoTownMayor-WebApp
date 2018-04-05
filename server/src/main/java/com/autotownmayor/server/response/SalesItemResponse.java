@@ -11,6 +11,9 @@ public class SalesItemResponse {
 	private String description;
 	private BigDecimal price;
 	private int quantity;
+	private String category;
+	private String brand;
+	private String imageUrl;
 	
 	
 	public SalesItemResponse() {
@@ -18,7 +21,7 @@ public class SalesItemResponse {
 	}
 
 	public SalesItemResponse(String id, String type, String activeStatus, String name, String description,
-			BigDecimal price, int quantity) {
+			BigDecimal price, int quantity, String category, String brand, String imageUrl) {
 		super();
 		this.type = type;
 		this.activeStatus = activeStatus;
@@ -26,6 +29,9 @@ public class SalesItemResponse {
 		this.description = description;
 		this.price = price;
 		this.quantity = quantity;
+		this.category = category;
+		this.brand = brand;
+		this.imageUrl = imageUrl;
 	}
 
 	public String getId() {
@@ -83,6 +89,28 @@ public class SalesItemResponse {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
-	
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 }

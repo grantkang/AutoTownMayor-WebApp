@@ -18,7 +18,11 @@ public class SalesItemEntityToSalesItemResponseConverter implements Function<Sal
 		salesItemResponse.setPrice(source.getPrice());
 		salesItemResponse.setQuantity(source.getQuantity());
 		salesItemResponse.setType(source.getType());
-		
+		salesItemResponse.setCategory(source.getCategory());
+		salesItemResponse.setBrand(source.getBrand());
+		salesItemResponse.setImageUrl(source.getImageUrl());
+
+
 		//TODO:Add links later when we get images
 		
 		return salesItemResponse;

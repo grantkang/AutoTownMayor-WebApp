@@ -17,17 +17,23 @@ public class SalesItemEntity {
 	private String description;
 	private BigDecimal price;
 	private int quantity;
+	private String category;
+	private String brand;
+	private String imageUrl;
 	
 	//TODO: Maybe add List<ItemType> so we can let customers filter through items
 	
 	public SalesItemEntity() {}
 
-	public SalesItemEntity(String activeStatus, String name, String description, BigDecimal price, int quantity) {
+	public SalesItemEntity(String activeStatus, String name, String description, BigDecimal price, int quantity, String category, String brand, String imageUrl) {
 		this.activeStatus = activeStatus;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.quantity = quantity;
+		this.category = category;
+		this.brand = brand;
+		this.imageUrl = imageUrl;
 	}
 
 	public String getId() {
@@ -91,8 +97,35 @@ public class SalesItemEntity {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
-	public String toString() {
+
+	@JsonProperty("CATEGORY")
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    @JsonProperty("BRAND")
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    @JsonProperty("IMAGEURL")
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String toString() {
 		return String.format("SalesItem[id=%s,activeStatus=%s,name=%s,description=%s,price=%.2f,qty=%d]", id,activeStatus,name,description,price,quantity);
 	}
 	
