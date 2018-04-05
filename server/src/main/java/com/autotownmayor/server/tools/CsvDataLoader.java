@@ -14,7 +14,13 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 
 public class CsvDataLoader {
 	public CsvDataLoader() {};
-	
+
+	/* TODO: Default exported QBooks will give an error due to
+	 *       1) InvalidFormatException, some of the items are discounts/tax_rates so the price column has a %age instead of a big decimal (Ex: 0%)
+	 *       2) CharConversionException, some symbols such as registered trademark are not part of UTF-8. (Ex:Stinger/Rotabroach ®)
+	 *
+	 *
+	 */
 	public <T> List<T> loadObjectList(Class<T> type, String fileName) {
 	    try {
 	        CsvSchema bootstrapSchema = CsvSchema.emptySchema().withHeader();
