@@ -49,7 +49,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     private void initItemList() {
         salesItemRepository.deleteAll();
         QbItemListToMongoImporter importer = new QbItemListToMongoImporter();
-        importer.importFromCsv(salesItemRepository, "/testitemlist.csv");
+        importer.importFromCsv(salesItemRepository, "/ATM_ITEM_LIST.csv");
     }
 
     private void initContactMessages() {
