@@ -9,11 +9,13 @@ import { ProductListComponent } from './product-list.component';
 import { productReducer } from './store/product.reducers';
 import { ProductEffects } from './store/product.effects';
 import { SharedModule } from '../shared/shared.module';
+import { ProductListFilterComponent } from './product-list-filter/product-list-filter.component';
 
 @NgModule({
   declarations: [
     ProductDetailComponent,
-    ProductListComponent
+    ProductListComponent,
+    ProductListFilterComponent
   ],
   imports: [
     CommonModule,

@@ -24,7 +24,6 @@ export class ProductListComponent implements OnInit {
   currentPage: number;
   displayedColumns = ['name', 'price', 'quantity'];
   productState: Observable<fromProduct.State>;
-  appState: Observable<fromApp.AppState>;
 
   constructor(private store: Store<fromProduct.FeatureState>,
               private route: ActivatedRoute,
@@ -35,28 +34,27 @@ export class ProductListComponent implements OnInit {
     this.route.queryParams.subscribe(
       (queryParams: Params) => {
         console.log('Page:' + queryParams['page']);
-        this.store.dispatch(new ProductActions.FetchPageableProductList(+queryParams['page']));
+        this.store.dispatch(new ProductActions.FetchPageableProductList({
+          page: +queryParams['page'],
+          nameFilter: queryParams['nameFilter'],
+          categoryFilter: queryParams['categoryFilter']
+        }
+        ));
       }
     );
   }
 
-  // applyFilter(filterValue: string) {
-  //   filterValue = filterValue.trim(); // Remove whitespace
-  //   filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-  //   this.salesItemPageTable.salesItems.filter = filterValue;
-  // }
   onSelectElement(element) {
     this.router.navigate(['./item'], { relativeTo: this.route, queryParams: {id: element['id']}})
   }
 
   onNextPage(event) {
-    this.router.navigate(['.'], { relativeTo: this.route, queryParams: {page: event['pageIndex']} });
+    this.router.navigate(['.'], { relativeTo: this.route, queryParams: {
+      page: event['pageIndex'],
+      nameFilter: this.route.snapshot.queryParams.nameFilter,
+      categoryFilter: this.route.snapshot.queryParams.categoryFilter
+    }});
   }
 
-  // onSubmit({ value, valid }: { value: ItemSearch, valid: boolean }) {
 
-  // }
 }
-
-// export interface ItemSearch {
-// }

@@ -6,6 +6,8 @@
   <!-- <mat-form-field>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field> -->
+  <app-product-list-filter>
+  </app-product-list-filter>
   <mat-table #table [dataSource]="(productState | async).pageableProductList.salesItems">
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelectElement(row)" style="cursor: pointer;"></mat-row>
@@ -16,13 +18,13 @@
     </ng-container>
 
     <ng-container matColumnDef="price">
-      <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.price | currency}}</mat-cell>
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.description}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="quantity">
-      <mat-header-cell *matHeaderCellDef> Qty. </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.quantity}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.price | currency}} </mat-cell>
     </ng-container>
 
 

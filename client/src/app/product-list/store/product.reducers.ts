@@ -1,16 +1,16 @@
 import { MatTableDataSource } from '@angular/material';
 
-import * as ProductActions from './product.actions';
+import { SalesItem } from '../../shared/model/salesitem.model';
 import { PageableProductList } from '../product-list-pageable.model';
 import * as fromApp from '../../store/app.reducers';
-import { SalesItem } from '../../shared/model/salesitem.model';
+import * as ProductActions from './product.actions';
 
 export interface FeatureState extends fromApp.AppState {
   products: State
 }
 
 export interface State {
-  pageableProductList: PageableProductList;
+  pageableProductList: PageableProductList,
   currentProduct: SalesItem
 }
 

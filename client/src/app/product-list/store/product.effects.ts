@@ -20,10 +20,21 @@ export class ProductEffects {
   pageableProductListFetch = this.actions$
     .ofType(ProductActions.FETCH_PAGEABLE_PRODUCT_LIST)
     .switchMap((action: ProductActions.FetchPageableProductList) => {
-      const pageNumber = action.payload.toString();
+      const pageNumber = action.payload.page.toString();
+      const nameFilter = action.payload.nameFilter;
+      const categoryFilter = action.payload.categoryFilter;
       const requestURL = AppConstant.BASE_URL + AppConstant.ITEMS_URL;
-      const param = new HttpParams().set('page', pageNumber);
-      return this.httpClient.get<PageableProductList>(requestURL, {params: param});
+      let params = new HttpParams().set('page', pageNumber);
+      if (action.payload.nameFilter != null) {
+        params = params.append('nameFilter', nameFilter);
+      }
+      if (action.payload.categoryFilter != null) {
+        action.payload.categoryFilter.forEach(category => {
+          params = params.append('categoryFilter', category)
+        });
+      }
+
+      return this.httpClient.get<PageableProductList>(requestURL, {params: params});
     })
     .map(
       (response) => {

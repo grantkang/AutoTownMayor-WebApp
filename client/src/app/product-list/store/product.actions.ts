@@ -11,7 +11,11 @@ export const SET_PRODUCT = 'SET_PRODUCT';
 export class FetchPageableProductList implements Action {
   readonly type = FETCH_PAGEABLE_PRODUCT_LIST;
 
-  constructor(public payload: number) {}
+  constructor(public payload: {
+    page: number,
+    nameFilter: string,
+    categoryFilter: string[]
+  }) {}
 }
 
 export class SetPageableProductList implements Action {
