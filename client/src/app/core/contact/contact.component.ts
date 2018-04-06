@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar } from '@angular/material';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AppConstant } from '../../app.constant';
 
 @Component({
   selector: 'app-contact',
@@ -11,7 +12,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ContactComponent implements OnInit {
   contactForm: FormGroup;
-  baseURL = 'http://localhost:8080';  // TODO: Create a class w/ all the resource constants in the shared folder
 
   constructor(public dialogRef: MatDialogRef<ContactComponent>, public snackBar: MatSnackBar, public http: HttpClient) { }
 
@@ -39,7 +39,7 @@ export class ContactComponent implements OnInit {
     const body = JSON.stringify(res);
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    this.http.post(this.baseURL + '/contact/v1', body, {
+    this.http.post(AppConstant.BASE_URL + AppConstant.CONTACT_URL, body, {
       headers: headers
     }).subscribe(
       (response) => {

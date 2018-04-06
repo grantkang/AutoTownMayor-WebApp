@@ -6,7 +6,7 @@ export interface State {
   authenticated: boolean;
 }
 
-const initialState: State = checkIfTokenValid();
+const initialState: State = getInitialAuthState();
 
 export function authReducer(state = initialState, action: AuthActions.AuthActions) {
   switch (action.type) {
@@ -31,8 +31,7 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
   }
 }
 
-// TODO: Add a check to see if the token is expired
-function checkIfTokenValid(): State {
+function getInitialAuthState(): State {
   const unauthorizedState: State = {
     token: null,
     authenticated: false
@@ -40,13 +39,26 @@ function checkIfTokenValid(): State {
 
   const token: string = localStorage.getItem('token');
 
-  if (token == null) {
-    return unauthorizedState;
-  } else {
+  if (isTokenValid(token)) {
     return {
       token: token,
       authenticated: true
     };
+  } else {
+    return unauthorizedState;
   }
 }
 
+function isTokenValid(token: string): boolean {
+  const jwtHelper: JwtHelper = new JwtHelper();
+  return token != null && !jwtHelper.isTokenExpired(token);
+}
+
+function getTokenFromStorage(): string {
+  const token = localStorage.getItem('token');
+  if (isTokenValid(token)) {
+    return token;
+  } else {
+    return null;
+  }
+}
