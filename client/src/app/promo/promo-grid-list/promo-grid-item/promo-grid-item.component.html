@@ -1,0 +1,9 @@
+<mat-card class="promo-grid-item-container">
+  <img mat-card-image [src]="promoGridItem.imgPath" alt="{{ promoGridItem.name }}">
+  <mat-card-content>
+    <span class="mat-typography">{{promoGridItem.name}}</span>
+  </mat-card-content>
+  <mat-card-actions>
+    <a mat-raised-button color="primary" [href]="promoGridItem.filepath" download>Download</a>
+  </mat-card-actions>
+</mat-card>

@@ -1,15 +1,3 @@
 <span>Promotional Items</span>
-<ngx-carousel
-  [inputs]="carouselBanner"
-  [moveToSlide]="1"
-  (onMove)="onmoveFn($event)">
-      <ngx-item NgxCarouselItem *ngFor="let flyer of flyers">
-        <div class="bannerStyle">
-          <a target="_blank" [href]="flyer.filepath">
-              <img [src]="flyer.bannerImgPath" [alt]="flyer.name">
-          </a>
-        </div>
-      </ngx-item>
-      <button NgxCarouselPrev class='leftRs'>&lt;</button>
-      <button NgxCarouselNext class='rightRs'>&gt;</button>
-</ngx-carousel>
+<app-promo-carousel></app-promo-carousel>
+<app-promo-grid-list></app-promo-grid-list>

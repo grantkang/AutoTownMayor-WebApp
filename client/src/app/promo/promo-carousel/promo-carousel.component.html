@@ -1,0 +1,14 @@
+<ngx-carousel
+  [inputs]="carouselBanner"
+  [moveToSlide]="1"
+  (onMove)="onmoveFn($event)">
+      <ngx-item NgxCarouselItem *ngFor="let carouselItem of (promoState | async).carouselItems">
+        <div class="bannerStyle">
+          <a target="_blank" [href]="carouselItem.filepath">
+              <img [src]="carouselItem.bannerImgPath" [alt]="carouselItem.name">
+          </a>
+        </div>
+      </ngx-item>
+      <button NgxCarouselPrev class='leftRs'>&lt;</button>
+      <button NgxCarouselNext class='rightRs'>&gt;</button>
+</ngx-carousel>

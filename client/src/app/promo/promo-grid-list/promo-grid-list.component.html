@@ -1,0 +1,5 @@
+<div fxFlex="" fxLayout="row">
+  <app-promo-grid-item
+    *ngFor="let gridItem of (promoState | async).gridItems"
+    [promoGridItem] = "gridItem"></app-promo-grid-item>
+</div>
