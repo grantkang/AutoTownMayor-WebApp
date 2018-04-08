@@ -7,7 +7,7 @@ import * as fromApp from './store/app.reducers';
 import * as fromAuth from './auth/store/auth.reducers';
 import * as AuthAction from './auth/store/auth.actions';
 import { Store } from '@ngrx/store';
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +22,7 @@ export class AppComponent implements OnChanges {
   ngOnChanges() {
     console.log('onChanges() called');
     const token = localStorage.getItem('token');
-    const jwtHelper: JwtHelper = new JwtHelper();
+    const jwtHelper: JwtHelperService = new JwtHelperService();
     if (jwtHelper.isTokenExpired(token)) {
       this.store.dispatch(new AuthAction.Logout());
     }

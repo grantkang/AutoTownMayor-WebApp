@@ -1,7 +1,7 @@
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { AppConstant } from '../../app.constant';
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 import * as fromApp from '../../store/app.reducers';
 import { Store } from '@ngrx/store';
@@ -15,7 +15,7 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     console.log('Intercepted!', req);
 
-    const jwtHelper: JwtHelper = new JwtHelper();
+    const jwtHelper: JwtHelperService = new JwtHelperService();
     const myToken = localStorage.getItem('token');
     const originalURL = req.url;
     let editedRequest;

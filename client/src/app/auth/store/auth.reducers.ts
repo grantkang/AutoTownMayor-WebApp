@@ -1,5 +1,5 @@
 import * as AuthActions from './auth.actions';
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 export interface State {
   token: string;
@@ -50,7 +50,7 @@ function getInitialAuthState(): State {
 }
 
 function isTokenValid(token: string): boolean {
-  const jwtHelper: JwtHelper = new JwtHelper();
+  const jwtHelper: JwtHelperService = new JwtHelperService();
   return token != null && !jwtHelper.isTokenExpired(token);
 }
 
