@@ -6,6 +6,7 @@ export const SIGNUP = 'SIGNUP';
 export const SIGNIN = 'SIGNIN';
 export const LOGOUT = 'LOGOUT';
 export const SET_TOKEN = 'SET_TOKEN';
+export const AUTH_FAILED = 'AUTH_FAILED';
 
 
 
@@ -28,4 +29,8 @@ export class SetToken implements Action {
     constructor(public payload: string) {}
 }
 
-export type AuthActions = Signin | Logout | SetToken | TrySignin;
+export class SigninFailed implements Action {
+  readonly type = AUTH_FAILED;
+}
+
+export type AuthActions = Signin | Logout | SetToken | TrySignin | SigninFailed;

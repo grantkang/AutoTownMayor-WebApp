@@ -6,13 +6,14 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 import { fromPromise } from 'rxjs/observable/fromPromise';
+import { Observable } from 'rxjs/Rx';
 
 import * as AuthActions from './auth.actions';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AppConstant } from '../../app.constant';
 
 @Injectable()
 export class AuthEffects {
-  loginURL = 'http://localhost:8080/login'
 
     @Effect()
     authSignin = this.actions$
@@ -21,24 +22,27 @@ export class AuthEffects {
         return action.payload;
       })
       .switchMap((authData: {username: string, password: string}) => {
-        return(this.httpClient.post(this.loginURL, authData, {observe: 'response'}));
-      })
-      .map((response) => {
-        return response.headers.get('Authorization').replace('Bearer ', '');
-      })
-      .mergeMap((token: string) => {
-        localStorage.setItem('token', token);
-        this.router.navigate(['/']);
-        return [
-          {
-            type: AuthActions.SIGNIN
-          },
-          {
-            type: AuthActions.SET_TOKEN,
-            payload: token
-          }
-        ];
-      });
+        return(this.httpClient.post(AppConstant.BASE_URL + AppConstant.LOGIN_URL, authData, {observe: 'response'}))
+        .map((response) => {
+          return response.headers.get('Authorization').replace('Bearer ', '');
+        })
+        .mergeMap((token: string) => {
+          localStorage.setItem('token', token);
+          this.router.navigate(['/']);
+          return [
+            {
+              type: AuthActions.SIGNIN
+            },
+            {
+              type: AuthActions.SET_TOKEN,
+              payload: token
+            }
+          ];
+        })
+        .catch(err => {
+          return Observable.of({ type: AuthActions.AUTH_FAILED });
+        });
+    }).share();
 
     @Effect({dispatch: false})
     authLogout = this.actions$
