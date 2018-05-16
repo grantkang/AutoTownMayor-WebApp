@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 
 import * as ContactActions from './contact.actions';
+import { AppConstant } from '../../../app.constant';
 
 @Injectable()
 export class ContactEffects {
@@ -14,7 +15,7 @@ export class ContactEffects {
       const body = JSON.stringify(res);
       const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-      return this.http.post(this.baseURL + '/contact/v1', body, {
+      return this.http.post(AppConstant.BASE_URL + AppConstant.CONTACT_URL, body, {
         headers: headers
       });
     }).map(
@@ -25,9 +26,6 @@ export class ContactEffects {
         return 'error';
       }
     )
-
-
-  baseURL = 'http://localhost:8080';  // TODO: Create a class w/ all the resource constants in the shared folder
 
   constructor(private actions$: Actions,
     private http: HttpClient) {}
