@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import * as fromApp from '../../store/app.reducers';
-import * as AuthAction from '../../auth/store/auth.actions';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+
+import * as fromApp from '../../store/app.reducers';
+import * as AuthAction from '../../auth/store/auth.actions';
+import { AppConstant } from '../../app.constant';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class HeaderComponent implements OnInit {
   authState: Observable<{authenticated: boolean}>;
-  title = 'Auto Town Mayor';
+  title = AppConstant.COMPANY_NAME;
 
   constructor(private store: Store<fromApp.AppState>) {}
 
