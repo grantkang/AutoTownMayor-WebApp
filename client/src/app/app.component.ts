@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 
 import * as fromApp from './store/app.reducers';
 import * as fromAuth from './auth/store/auth.reducers';

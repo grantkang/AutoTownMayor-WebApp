@@ -1,5 +1,5 @@
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { AppConstant } from '../../app.constant';
 import { JwtHelperService } from '@auth0/angular-jwt';
 

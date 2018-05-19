@@ -3,9 +3,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import { Observable } from 'rxjs/Rx';
+
+
+import { Observable } from 'rxjs';
 
 import { PageableProductList } from './product-list-pageable.model';
 import { SalesItem } from '../shared/model/salesitem.model';

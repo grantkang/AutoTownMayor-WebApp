@@ -1,7 +1,9 @@
+
+import {filter} from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Observable, Subscription } from 'rxjs';
 
 import * as fromApp from '../../store/app.reducers';
 import * as AuthActions from '../store/auth.actions';
@@ -40,8 +42,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       'username': new FormControl(usernameInput, Validators.required),
       'password': new FormControl(passwordInput, Validators.required)
     });
-    this.formError = this.authEffects.authSignin
-      .filter(action => action.type === AuthActions.AUTH_FAILED)
+    this.formError = this.authEffects.authSignin.pipe(
+      filter(action => action.type === AuthActions.AUTH_FAILED))
       .subscribe(() => {
         this.snackBar.open('Invalid username/password combination.', null, { duration: 3000 });
       });
