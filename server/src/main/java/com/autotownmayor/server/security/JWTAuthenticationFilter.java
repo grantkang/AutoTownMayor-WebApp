@@ -21,10 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.autotownmayor.server.security.SecurityConstants.TEST_EXPIRATION_TIME;
-import static com.autotownmayor.server.security.SecurityConstants.SECRET;
-import static com.autotownmayor.server.security.SecurityConstants.HEADER_STRING;
-import static com.autotownmayor.server.security.SecurityConstants.TOKEN_PREFIX;
+import static com.autotownmayor.server.security.SecurityConstants.*;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -66,10 +63,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String token = Jwts.builder()
                 .setSubject(((User) auth.getPrincipal()).getUsername())
-                .setExpiration(new Date(System.currentTimeMillis() + TEST_EXPIRATION_TIME))
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
                 .compact();
-        res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
+        res.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + token);
         res.addHeader("Access-Control-Expose-Headers", HEADER_STRING);
     }
 }
