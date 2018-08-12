@@ -3,7 +3,7 @@ package com.autotownmayor.server.request;
 public class ContactRequest {
 	private String email;
 	private String message;
-	private String secretCode;
+	private String grecaptchaResponse;
 	
 	public ContactRequest() {
 		super();
@@ -31,12 +31,12 @@ public class ContactRequest {
 		this.message = message;
 	}
 
-	public String getSecretCode() {
-		return secretCode;
+	public String getGrecaptchaResponse() {
+		return grecaptchaResponse;
 	}
 
-	public void setSecretCode(String secretCode) {
-		this.secretCode = secretCode;
+	public void setGrecaptchaResponse(String secretCode) {
+		this.grecaptchaResponse = secretCode;
 	}
 		
 }

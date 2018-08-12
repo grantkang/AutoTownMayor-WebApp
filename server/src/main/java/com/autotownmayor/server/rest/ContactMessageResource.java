@@ -1,5 +1,6 @@
 package com.autotownmayor.server.rest;
 
+import com.autotownmayor.server.service.RecaptchaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,13 +21,17 @@ import com.autotownmayor.server.request.ContactRequest;
 public class ContactMessageResource {
 	@Autowired
 	ContactMessageRepository contactMessageRepository;
+
+	@Autowired
+	RecaptchaService recaptchaService;
 	
 	
 	@RequestMapping(path="", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> createContactMessage(@RequestBody ContactRequest contactRequest) {
-		// TODO: Possibly implement some sort of captcha to prevent spambots
 		System.out.println("ContactMessage POST called!");
-		if(contactRequest.getSecretCode().equals("secret")) {
+
+		String result = recaptchaService.verifyRecaptcha(null, contactRequest.getGrecaptchaResponse());
+		if(result.equals("")) {
 			System.out.println("ContactMessage POST success!");
 			contactMessageRepository.insert(new ContactMessageEntity(contactRequest.getEmail(),contactRequest.getMessage()));
 			return new ResponseEntity<>(HttpStatus.CREATED);
@@ -34,6 +39,5 @@ public class ContactMessageResource {
 			System.out.println("ContactMessage POST failure!");
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-
 	}
 }

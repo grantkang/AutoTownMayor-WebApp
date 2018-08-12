@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.cors().and().csrf().disable().authorizeRequests()
 			.antMatchers(HttpMethod.GET, "/items/v1/withoutprices/**").permitAll()
-//			.antMatchers(HttpMethod.POST, "/contact/v1").permitAll()
+			.antMatchers(HttpMethod.POST, "/contact/v1").permitAll()
             .anyRequest().authenticated()
             .and()
             .addFilter(new JWTAuthenticationFilter(authenticationManager()))
