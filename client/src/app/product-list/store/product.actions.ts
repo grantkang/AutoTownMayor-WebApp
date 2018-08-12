@@ -7,6 +7,7 @@ export const FETCH_PAGEABLE_PRODUCT_LIST = 'FETCH_PAGEABLE_PRODUCT_LIST';
 export const SET_PAGEABLE_PRODUCT_LIST = 'SET_PAGEABLE_PRODUCT_LIST';
 export const FETCH_PRODUCT_BY_ID = 'FETCH_PRODUCT_BY_ID';
 export const SET_PRODUCT = 'SET_PRODUCT';
+export const REPLACE_PRODUCT_IMG = 'REPLACE_PRODUCT_IMG';
 
 export class FetchPageableProductList implements Action {
   readonly type = FETCH_PAGEABLE_PRODUCT_LIST;
@@ -36,4 +37,11 @@ export class SetProduct implements Action {
   constructor(public payload: SalesItem) {}
 }
 
-export type ProductActions = FetchPageableProductList | SetPageableProductList | FetchPageableProductList | SetProduct;
+export class ReplaceProductImage implements Action {
+  readonly type = REPLACE_PRODUCT_IMG;
+
+  constructor() {}
+}
+
+export type ProductActions = FetchPageableProductList | SetPageableProductList | FetchPageableProductList | SetProduct |
+  ReplaceProductImage;

@@ -15,7 +15,13 @@ import { SalesItem } from '../../shared/model/salesitem.model';
 })
 export class ProductDetailComponent implements OnInit {
   productState: Observable<fromProduct.State>;
+  imagePathPrefix = 'assets/images/items/';
+  placeholderImagePathDefaultPrefix = 'unavailable/';
+  placeholderImagePathDefaultSuffix = '_default_dev.jpg';
+  // TODO: If both default/backup images are unavailable, replaceImages() gets called repeatedly. Include a backup image for misc./blank
+
   // TODO: Application tries to read the properties of pruductState.currentItem before the FetchProductById is called.
+  // TODO: Have a placeholder image ready based on category for items that don't have product photos
 
   constructor(private store: Store<fromProduct.FeatureState>,
               private route: ActivatedRoute,
@@ -30,4 +36,9 @@ export class ProductDetailComponent implements OnInit {
       }
     );
   }
+
+  replaceImage() {
+    this.store.dispatch(new ProductActions.ReplaceProductImage());
+  }
+
 }

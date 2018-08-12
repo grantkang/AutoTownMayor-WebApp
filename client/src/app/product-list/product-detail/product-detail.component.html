@@ -1,9 +1,9 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>{{(productState | async).currentProduct.name}}</mat-card-title>
-    <mat-card-subtitle>Inventory Type Placeholder</mat-card-subtitle>
+    <mat-card-subtitle>{{(productState | async).currentProduct.category}}</mat-card-subtitle>
   </mat-card-header>
-  <img src="https://www.theyearinpictures.co.uk/images//image-placeholder.png" alt="PlaceholderImg">
+  <img [src]="'../../../' + imagePathPrefix + (productState | async).currentProduct.imgPath" alt="Image not found" (error)="replaceImage()" />
   <mat-card-content>
     <p>{{(productState | async).currentProduct.description}}</p>
   </mat-card-content>

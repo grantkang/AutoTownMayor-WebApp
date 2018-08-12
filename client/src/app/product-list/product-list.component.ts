@@ -22,7 +22,7 @@ import * as fromApp from '../store/app.reducers';
 })
 export class ProductListComponent implements OnInit {
   currentPage: number;
-  displayedColumns = ['name', 'price', 'quantity'];
+  displayedColumns = ['type', 'name', 'price', 'quantity'];
   productState: Observable<fromProduct.State>;
 
   constructor(private store: Store<fromProduct.FeatureState>,

@@ -16,7 +16,7 @@ export interface State {
 
 const initialState = {
   pageableProductList: {},
-  currentProduct: {}
+  currentProduct: new SalesItem()
 }
 
 export function productReducer(state = initialState, action: ProductActions.ProductActions) {
@@ -27,10 +27,18 @@ export function productReducer(state = initialState, action: ProductActions.Prod
           pageableProductList: action.payload
         };
       case ProductActions.SET_PRODUCT:
+        action.payload.imgPath = action.payload.name + '.jpg';
         return {
           ...state,
           currentProduct: action.payload
         };
+      case ProductActions.REPLACE_PRODUCT_IMG:
+        const oldProduct = state.currentProduct;
+        oldProduct.imgPath = 'unavailable/' + oldProduct.category + '_default_dev.jpg';
+        return {
+          ...state,
+          currentProduct: oldProduct
+        }
       default:
         return state;
   }
