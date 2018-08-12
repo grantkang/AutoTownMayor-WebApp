@@ -1,18 +1,18 @@
 
-<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="start center">
-  <mat-toolbar color="primary">
-    <span>Contact Us</span>
-  </mat-toolbar>
-  <mat-form-field>
-    <input matInput id="email" formControlName="email" placeholder="E-mail" type="email">
-  </mat-form-field>
-  <mat-form-field>
-    <textarea matInput id="message" formControlName="message" placeholder="Message"></textarea>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput id="captcha" formControlName="captcha" placeholder="Fake Captcha" type="text">
-  </mat-form-field>
-  <button mat-raised-button type="submit" color="primary" [disabled]="!contactForm.valid">
-    Submit
-  </button>
-</form>
+<div class="form-container">
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="start center">
+    <mat-toolbar color="primary">
+      <span>Contact Us</span>
+    </mat-toolbar>
+    <mat-form-field class="form-input">
+      <input matInput id="email" formControlName="email" placeholder="E-mail" type="email">
+    </mat-form-field>
+    <mat-form-field class="form-input">
+      <textarea matInput matTextareaAutosize matAutosizeMinRows=4 id="message" formControlName="message" placeholder="Message"></textarea>
+    </mat-form-field>
+    <re-captcha formControlName="recaptchaReactive" (resolved)="resolved($event)"></re-captcha>
+    <button mat-raised-button type="submit" color="primary" [disabled]="!contactForm.valid">
+      Submit
+    </button>
+  </form>
+</div>

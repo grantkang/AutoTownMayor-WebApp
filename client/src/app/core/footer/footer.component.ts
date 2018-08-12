@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Overlay } from '@angular/cdk/overlay';
 
 import { ContactComponent } from '../contact/contact.component';
 
@@ -12,10 +13,14 @@ export class FooterComponent {
   // TODO: Fix so Ng Flex API is used properly
   copyrightMessage = '\u00A9' + new Date().getFullYear().toString() + ' AutoTownMayor';
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, public overlay: Overlay) {}
 
   onOpenContact() {
-    const dialogRef = this.dialog.open(ContactComponent, {});
+    const dialogRef = this.dialog.open(ContactComponent, {
+      height: '500px',
+      width: '600px',
+      scrollStrategy: this.overlay.scrollStrategies.noop() // This fixed the grecaptcha popup issue somehow
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);

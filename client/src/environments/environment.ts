@@ -15,9 +15,13 @@ const COMPANY_INFO_DEV = {
   addressZip: 'XXXXX',
   googleMapsEmbedURL: 'https://www.google.com/maps/embed?pb'
 }
+const RECAPTCHA_DEV = '6LcAFGkUAAAAAMwK6y0rtk_7sKexH_N6u_1MaSxD';
 
 export const environment = {
   production: false,
   baseUrl: BASE_URL_DEV,
-  companyInfo: COMPANY_INFO_DEV
+  companyInfo: COMPANY_INFO_DEV,
+  recaptcha: RECAPTCHA_DEV
 };
+
+

@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
+import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 
 import { AppRoutingModule } from '../app-routing.module';
+import { AppConstant } from '../../app/app.constant';
 import { SharedModule } from '../shared/shared.module';
-import { MaterialModule } from '../shared/module/material.module';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { ContactComponent } from './contact/contact.component';
@@ -21,6 +23,8 @@ import { AuthInterceptor } from '../shared/interceptor/auth.interceptor';
     AppRoutingModule,
     CommonModule,
     FormsModule,
+    RecaptchaModule.forRoot(),
+    RecaptchaFormsModule,
     ReactiveFormsModule,
     SharedModule
   ],
@@ -31,7 +35,14 @@ import { AuthInterceptor } from '../shared/interceptor/auth.interceptor';
     HeaderComponent
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: AppConstant.RECAPTCHA_SITE_KEY
+        ,
+      } as RecaptchaSettings,
+    }
   ]
 })
 export class CoreModule {}

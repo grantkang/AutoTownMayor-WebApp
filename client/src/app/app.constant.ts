@@ -57,4 +57,7 @@ export class AppConstant {
   static readonly ADDRESS_STATE: string = `${environment.companyInfo.addressState}`;
   static readonly ADDRESS_ZIP: string = `${environment.companyInfo.addressZip}`;
   static readonly COMPANY_INFO = environment.companyInfo;
+
+  //Recaptcha
+  static readonly RECAPTCHA_SITE_KEY: string = `${environment.recaptcha}`;
 }
