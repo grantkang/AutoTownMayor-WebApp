@@ -1,18 +1,31 @@
 <mat-toolbar color="primary">
-  <!-- <button mat-button>
-    <mat-icon>list</mat-icon>
-  </button> -->
-  <button mat-button routerLink='./promo' routerLinkActive="active">
-    <img width="35" src="../assets/images/ATM_logo.png"/><b style="font-family:Eras ITC;font-size:150%">{{title}}</b>
-  </button>
-  <button mat-button routerLink="/products" routerLinkActive="active">
-    Products
-  </button>
-  <button mat-button routerLink="/about" routerLinkActive="active">
-    About Us
-  </button>
-  <div fxFlex="" fxFlexAlign="end end" style="text-align: right; font-size:75%">
-      <span *ngIf="!(authState | async).authenticated" routerLink="/login" style="cursor: pointer;">Login</span>
-      <span *ngIf="(authState | async).authenticated" style="cursor: pointer;" (click)="onLogout()">Logout</span>
+  <div fxShow fxHide.lt-md=true id="content" >
+    <button mat-button routerLink='./promo' routerLinkActive="active">
+      <img width="35" src="../assets/images/ATM_logo.png"/><b style="font-family:Eras ITC;font-size:150%">{{title}}</b>
+    </button>
+    <button mat-button routerLink="/products" routerLinkActive="active">
+      Products
+    </button>
+    <button mat-button routerLink="/about" routerLinkActive="active">
+      About Us
+    </button>
   </div>
+  <div fxShow fxHide.gt-sm=true id="content" >
+    <button mat-button routerLink='./promo' routerLinkActive="active">
+      <img width="35" src="../assets/images/ATM_logo.png"/><b style="font-family:Eras ITC;font-size:150%">{{title}}</b>
+    </button>
+    <button mat-button [matMenuTriggerFor]="menu"><mat-icon>expand_more</mat-icon></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/products" routerLinkActive="active">
+        Products
+      </button>
+      <button mat-menu-item routerLink="/about" routerLinkActive="active">
+        About Us
+      </button>
+    </mat-menu>
+  </div>
+    <div fxFlex="" fxFlexAlign="end end" style="text-align: right; font-size:75%">
+        <span *ngIf="!(authState | async).authenticated" routerLink="/login" style="cursor: pointer;">Login</span>
+        <span *ngIf="(authState | async).authenticated" style="cursor: pointer;" (click)="onLogout()">Logout</span>
+    </div>
 </mat-toolbar>

@@ -16,7 +16,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AppComponent implements OnChanges {
   title = 'Auto Town Mayor';
-  // TODO: Use angular/flex-box to style shit
+  background = 'app/assets/images/ATM-background.png'
+
   constructor(private store: Store<fromApp.AppState>) {};
 
   ngOnChanges() {

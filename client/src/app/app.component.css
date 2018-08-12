@@ -5,3 +5,15 @@ md-sidenav-container {
    width: 100%;
    min-width: 100%;
 }
+
+.container-big {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.mat-dialog-container {
+  padding: 0;
+}
+

@@ -24,6 +24,9 @@ import {
 import {
   MatSelectModule
 } from '@angular/material/select';
+import {
+  MatMenuModule
+} from '@angular/material/menu'
 
   @NgModule({
     imports: [
@@ -35,6 +38,7 @@ import {
       MatIconModule,
       MatInputModule,
       MatListModule,
+      MatMenuModule,
       MatPaginatorModule,
       MatSelectModule,
       MatSidenavModule,
@@ -51,6 +55,7 @@ import {
       MatInputModule,
       MatIconModule,
       MatListModule,
+      MatMenuModule,
       MatPaginatorModule,
       MatSelectModule,
       MatSidenavModule,
