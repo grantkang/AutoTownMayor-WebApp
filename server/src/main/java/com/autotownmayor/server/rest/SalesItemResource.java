@@ -1,24 +1,31 @@
 package com.autotownmayor.server.rest;
 
+import java.io.*;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import com.autotownmayor.server.converter.SalesItemResponsePriceRemover;
+import com.autotownmayor.server.persistence.enums.AuthorityName;
+import com.autotownmayor.server.security.annotation.RestSecurity;
+import com.autotownmayor.server.tools.QbItemListToMongoImporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.autotownmayor.server.converter.SalesItemEntityToSalesItemResponseConverter;
-import com.autotownmayor.server.entity.SalesItemEntity;
+import com.autotownmayor.server.persistence.entity.SalesItemEntity;
 import com.autotownmayor.server.repository.PageableSalesItemRepository;
 import com.autotownmayor.server.repository.SalesItemRepository;
 import com.autotownmayor.server.response.SalesItemResponse;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping(ResourceConstants.SALES_ITEM_V1)
-public class ItemResource {
+public class SalesItemResource {
 	@Autowired
 	PageableSalesItemRepository pageableSalesItemRepository;
 	
@@ -66,6 +73,24 @@ public class ItemResource {
         }
         else {
             return pageableSalesItemRepository.findByType(type,pageable);
+        }
+    }
+
+    @RestSecurity(AuthorityName.ROLE_ADMIN)
+    @RequestMapping(path = ResourceConstants.UPLOAD_ITEM_LIST, method=RequestMethod.POST)
+    public void uploadItemList(@RequestParam("file") MultipartFile file) throws IOException {
+        try {
+            QbItemListToMongoImporter qbItemListToMongoImporter = new QbItemListToMongoImporter();
+            File convFile = new File(file.getOriginalFilename());
+            convFile.createNewFile();
+            FileOutputStream fos = new FileOutputStream(convFile);
+            fos.write(file.getBytes());
+            fos.close();
+            List<SalesItemEntity> items = qbItemListToMongoImporter.importFromCsv(convFile);
+            salesItemRepository.deleteAll();
+            salesItemRepository.saveAll(items);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.autotownmayor.server.entity.ContactMessageEntity;
+import com.autotownmayor.server.persistence.entity.ContactMessageEntity;
 import com.autotownmayor.server.repository.ContactMessageRepository;
 import com.autotownmayor.server.request.ContactRequest;
 
@@ -24,8 +24,7 @@ public class ContactMessageResource {
 
 	@Autowired
 	RecaptchaService recaptchaService;
-	
-	
+
 	@RequestMapping(path="", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> createContactMessage(@RequestBody ContactRequest contactRequest) {
 		System.out.println("ContactMessage POST called!");

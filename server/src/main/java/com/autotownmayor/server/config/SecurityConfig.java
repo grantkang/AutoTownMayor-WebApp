@@ -1,7 +1,7 @@
 package com.autotownmayor.server.config;
 
-import com.autotownmayor.server.security.JWTAuthenticationFilter;
-import com.autotownmayor.server.security.JWTAuthorizationFilter;
+import com.autotownmayor.server.security.filter.JWTAuthenticationFilter;
+import com.autotownmayor.server.security.filter.JWTAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

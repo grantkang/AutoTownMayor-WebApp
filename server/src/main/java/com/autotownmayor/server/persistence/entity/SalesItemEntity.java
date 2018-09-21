@@ -1,4 +1,4 @@
-package com.autotownmayor.server.entity;
+package com.autotownmayor.server.persistence.entity;
 
 import java.math.BigDecimal;
 
@@ -6,13 +6,17 @@ import org.springframework.data.annotation.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Document
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class SalesItemEntity {
 	@Id
 	private String id;
 	private String type;
 	private String activeStatus;
+	@Indexed(unique=true)
 	private String name;
 	private String description;
 	private BigDecimal price;

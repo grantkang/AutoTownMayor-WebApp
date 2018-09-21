@@ -1,8 +1,11 @@
-package com.autotownmayor.server.security;
+package com.autotownmayor.server.security.filter;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.autotownmayor.server.security.SecurityConstants.SECRET;
 import static com.autotownmayor.server.security.SecurityConstants.HEADER_STRING;
@@ -44,14 +48,21 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
             // parse the token.
-            String user = Jwts.parser()
+            Claims claims = Jwts.parser()
                     .setSigningKey(SECRET.getBytes())
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
-                    .getBody()
-                    .getSubject();
+                    .getBody();
 
-            if (user != null) {
-                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+            if (claims != null) {
+                Object username = claims.get("username");
+                Object permissions = claims.get("permissions");
+                List<GrantedAuthority> authorities = new ArrayList<>();
+                if (permissions != null && permissions instanceof List) {
+                    for (Object permission : (List<?>)permissions) {
+                        authorities.add(new SimpleGrantedAuthority(permission.toString()));
+                    }
+                }
+                return new UsernamePasswordAuthenticationToken(username, null, authorities);
             }
             return null;
         }

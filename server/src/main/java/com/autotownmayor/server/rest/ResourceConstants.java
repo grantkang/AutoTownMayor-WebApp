@@ -6,6 +6,12 @@ public class ResourceConstants {
 	public static final String CONTACT_MESSAGE_V1 = "/contact/v1";
 	public static final String SINGLE_ITEM_PATH = "item/{id}";
 	public static final String WITHOUT_PRICES_PATH = "withoutprices/";
+	public static final String UPLOAD_ITEM_LIST = "/upload";
+
+	public static final String USERS_V1 = "/users/v1";
+	public static final String SIGN_UP = "/signup";
+	public static final String LIST_USERS = "/list";
+
 
 
 	public static final String DEFAULT_ITEM_TYPE = "Inventory Part";

@@ -1,5 +1,8 @@
-package com.autotownmayor.server.entity;
+package com.autotownmayor.server.persistence.entity;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class ContactMessageEntity {
 	private String email;
 	private String message;

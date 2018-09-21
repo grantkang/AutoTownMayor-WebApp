@@ -4,7 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.autotownmayor.server.entity.SalesItemEntity;
+import com.autotownmayor.server.persistence.entity.SalesItemEntity;
 
 import java.util.List;
 

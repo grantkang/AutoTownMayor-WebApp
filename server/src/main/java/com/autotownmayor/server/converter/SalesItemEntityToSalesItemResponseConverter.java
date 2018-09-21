@@ -2,7 +2,7 @@ package com.autotownmayor.server.converter;
 
 import java.util.function.Function;
 
-import com.autotownmayor.server.entity.SalesItemEntity;
+import com.autotownmayor.server.persistence.entity.SalesItemEntity;
 import com.autotownmayor.server.response.SalesItemResponse;
 
 public class SalesItemEntityToSalesItemResponseConverter implements Function<SalesItemEntity,SalesItemResponse>{
