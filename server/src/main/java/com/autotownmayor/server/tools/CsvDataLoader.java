@@ -34,4 +34,17 @@ public class CsvDataLoader {
 	        return Collections.emptyList();
 	    }
 	}
+
+	public <T> List<T> loadObjectList(Class<T> type, File file) {
+		try {
+			CsvSchema bootstrapSchema = CsvSchema.emptySchema().withHeader();
+			CsvMapper mapper = new CsvMapper();
+			MappingIterator<T> readValues =
+					mapper.readerWithSchemaFor(type).with(bootstrapSchema).readValues(file);
+			return readValues.readAll();
+		} catch (Exception e) {
+			System.out.println("Error occurred while loading object list from file " + file.getName() + e);
+			return Collections.emptyList();
+		}
+	}
 }
