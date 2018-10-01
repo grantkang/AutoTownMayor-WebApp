@@ -8,7 +8,7 @@ import { Actions, Effect } from '@ngrx/effects';
 
 import * as ProductActions from './product.actions';
 import * as fromProduct from './product.reducers';
-import { PageableProductList } from '../product-list-pageable.model';
+import { PageableProductList } from '../product-list/product-list-pageable.model';
 import { SalesItem } from '../../shared/model/salesitem.model';
 import { AppConstant } from '../../app.constant';
 
@@ -47,7 +47,8 @@ export class ProductEffects {
         const last: boolean = response['last'];
         const size: number = response['size'];
         const number: number = response['number'];
-        const result = new PageableProductList(salesItems,
+        const result = new PageableProductList(
+          salesItems,
           totalPages,
           totalElements,
           first,
@@ -58,22 +59,23 @@ export class ProductEffects {
           type: ProductActions.SET_PAGEABLE_PRODUCT_LIST,
           payload: result
         }
-      }
-    ),);
+      })
+    );
 
   @Effect()
   productFetchById = this.actions$
     .ofType(ProductActions.FETCH_PRODUCT_BY_ID).pipe(
     switchMap((action: ProductActions.FetchPageableProductList) => {
       return this.httpClient.get<SalesItem>(AppConstant.BASE_URL + AppConstant.ITEM_URL + action.payload);
-    }),map(
+    }),
+    map(
       (response) => {
         return {
           type: ProductActions.SET_PRODUCT,
           payload: response
         }
       }
-    ),);
+    ));
 
   constructor(private actions$: Actions,
     private httpClient: HttpClient) {}

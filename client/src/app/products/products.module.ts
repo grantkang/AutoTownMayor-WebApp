@@ -5,21 +5,25 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { ProductListComponent } from './product-list.component';
+import { ProductListComponent } from './product-list/product-list.component';
 import { productReducer } from './store/product.reducers';
 import { ProductEffects } from './store/product.effects';
 import { SharedModule } from '../shared/shared.module';
-import { ProductListFilterComponent } from './product-list-filter/product-list-filter.component';
+import { ProductListFilterComponent } from './product-list/product-list-filter/product-list-filter.component';
+import { ProductsRoutingModule } from './products-routing.module';
+import { ProductsComponent } from './products.component';
 
 @NgModule({
   declarations: [
     ProductDetailComponent,
     ProductListComponent,
-    ProductListFilterComponent
+    ProductListFilterComponent,
+    ProductsComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
+    ProductsRoutingModule,
     ReactiveFormsModule,
     SharedModule,
     StoreModule.forFeature('products', productReducer),

@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { PageableProductList } from '../product-list-pageable.model';
+import { PageableProductList } from '../product-list/product-list-pageable.model';
 import { SalesItem } from '../../shared/model/salesitem.model';
 
 export const FETCH_PAGEABLE_PRODUCT_LIST = 'FETCH_PAGEABLE_PRODUCT_LIST';

@@ -1,18 +1,14 @@
 import { Store } from '@ngrx/store';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 
 import { Observable } from 'rxjs';
 
 import { PageableProductList } from './product-list-pageable.model';
-import { SalesItem } from '../shared/model/salesitem.model';
 
-import * as ProductActions from './store/product.actions';
-import * as fromProduct from './store/product.reducers';
-import * as fromApp from '../store/app.reducers';
+import * as ProductActions from '../store/product.actions';
+import * as fromProduct from '../store/product.reducers';
 
 @Component({
   selector: 'app-product-list',
@@ -33,7 +29,6 @@ export class ProductListComponent implements OnInit {
     this.productState = this.store.select('products');
     this.route.queryParams.subscribe(
       (queryParams: Params) => {
-        console.log('Page:' + queryParams['page']);
         this.store.dispatch(new ProductActions.FetchPageableProductList({
           page: +queryParams['page'],
           nameFilter: queryParams['nameFilter'],
@@ -44,8 +39,9 @@ export class ProductListComponent implements OnInit {
     );
   }
 
+  // TODO: Change it so that it opens a dialog
   onSelectElement(element) {
-    this.router.navigate(['./item'], { relativeTo: this.route, queryParams: {id: element['id']}})
+    // this.router.navigate(['./item'], { relativeTo: this.route, queryParams: {id: element['id']}})
   }
 
   onNextPage(event) {

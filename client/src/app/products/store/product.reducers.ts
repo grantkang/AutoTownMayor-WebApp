@@ -1,7 +1,7 @@
 import { MatTableDataSource } from '@angular/material';
 
 import { SalesItem } from '../../shared/model/salesitem.model';
-import { PageableProductList } from '../product-list-pageable.model';
+import { PageableProductList } from '../product-list/product-list-pageable.model';
 import * as fromApp from '../../store/app.reducers';
 import * as ProductActions from './product.actions';
 
@@ -15,7 +15,7 @@ export interface State {
 }
 
 const initialState = {
-  pageableProductList: {},
+  pageableProductList: new PageableProductList(new MatTableDataSource([]), 0, 0, true, true, 0, 0),
   currentProduct: new SalesItem()
 }
 

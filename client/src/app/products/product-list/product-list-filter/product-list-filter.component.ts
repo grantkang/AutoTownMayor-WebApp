@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import * as fromProduct from '../store/product.reducers';
-import { AppConstant } from '../../app.constant';
+import * as fromProduct from '../../store/product.reducers';
+import { AppConstant } from '../../../app.constant';
 
 @Component({
   selector: 'app-product-list-filter',
