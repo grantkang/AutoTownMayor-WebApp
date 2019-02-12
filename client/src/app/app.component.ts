@@ -3,6 +3,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 
+import { AppConstant } from './app.constant';
 import * as fromApp from './store/app.reducers';
 import * as fromAuth from './auth/store/auth.reducers';
 import * as AuthAction from './auth/store/auth.actions';
@@ -15,7 +16,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnChanges {
-  title = 'Auto Town Mayor';
+  title = AppConstant.COMPANY_NAME;
   background = 'app/assets/images/ATM-background.png'
 
   constructor(private store: Store<fromApp.AppState>) {};

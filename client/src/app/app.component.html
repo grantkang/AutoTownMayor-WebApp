@@ -5,23 +5,5 @@
   fxFlex.gt-sm="75%"
   ngClass.gt-sm="container-big"
   >
-  <app-header class="mat-elevation-z2" style="z-index:999"></app-header>
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="side">
-      <!-- <mat-nav-list *ngIf="!isLoggedIn">
-        <mat-list-item> Login </mat-list-item>
-      </mat-nav-list> -->
-      <!-- <mat-nav-list *ngIf="isLoggedIn">
-        <mat-list-item> Account Balance </mat-list-item>
-        <mat-list-item> Orders </mat-list-item>
-        <mat-list-item> Log Out </mat-list-item>
-      </mat-nav-list> -->
-    </mat-sidenav>
-    <div style="text-align:center;height:100%" class="mat-elevation-z2">
-      <router-outlet>
-
-      </router-outlet>
-    </div>
-  </mat-sidenav-container>
-  <app-footer></app-footer>
+  <router-outlet></router-outlet>
 </div>
