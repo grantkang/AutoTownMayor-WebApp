@@ -1,8 +1,13 @@
 package com.autotownmayor.server.request;
 
+import javax.validation.constraints.NotNull;
+
 public class ContactRequest {
+	@NotNull
 	private String email;
+	@NotNull
 	private String message;
+
 	private String grecaptchaResponse;
 	
 	public ContactRequest() {

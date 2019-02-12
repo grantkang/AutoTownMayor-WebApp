@@ -11,8 +11,11 @@ public class ResourceConstants {
 	public static final String USERS_V1 = "/users/v1";
 	public static final String SIGN_UP = "/signup";
 	public static final String LIST_USERS = "/list";
-
-
+	public static final String CHANGE_PASSWORD = "/changepassword";
+	public static final String RESET_PASSWORD = "/passwordreset";
+	public static final String RECOVER_USERNAME = "/recoverusername";
+	public static final String RESET_PASSWORD_START = "/passwordreset/start";
+	public static final String RESET_PASSWORD_END = "/passwordreset/end";
 
 	public static final String DEFAULT_ITEM_TYPE = "Inventory Part";
 }

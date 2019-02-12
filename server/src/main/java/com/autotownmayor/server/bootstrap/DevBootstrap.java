@@ -14,10 +14,8 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 @Profile("dev")
@@ -53,6 +51,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     private void initItemList() {
         QbItemListToMongoImporter importer = new QbItemListToMongoImporter();
         List<SalesItemEntity> items = importer.importFromCsv("/ATM_ITEM_LIST.csv");
+        items = items.stream().filter(item -> item.getActiveStatus().equals("Active")).filter(item -> !item.getCategory().equals("")).collect(Collectors.toList());
         salesItemRepository.deleteAll();
         salesItemRepository.saveAll(items);
     }
@@ -72,11 +71,10 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         List<ApplicationUserEntity> testUsers= new ArrayList<>();
 
         ApplicationUserEntity admin = new ApplicationUserEntity("admin", bCryptPasswordEncoder.encode("yeaR2018"), adminAuthorities);
-        ApplicationUserEntity testUser01 = new ApplicationUserEntity("user", bCryptPasswordEncoder.encode("password"), basicAuthorities);
-        ApplicationUserEntity testUser02 = new ApplicationUserEntity("anotheruser", bCryptPasswordEncoder.encode("test"), basicAuthorities);
+        ApplicationUserEntity testUser01 = new ApplicationUserEntity("gkang", bCryptPasswordEncoder.encode("yeaR2009"), basicAuthorities);
+        testUser01.setEmail("atmtester@yopmail.com");
 
         testUsers.add(testUser01);
-        testUsers.add(testUser02);
         testUsers.add(admin);
 
         applicationUserRepository.saveAll(testUsers);

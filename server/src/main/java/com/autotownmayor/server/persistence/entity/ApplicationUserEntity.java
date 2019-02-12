@@ -1,6 +1,8 @@
 package com.autotownmayor.server.persistence.entity;
 
 import com.autotownmayor.server.persistence.enums.AuthorityName;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,6 +13,9 @@ import java.util.stream.Collectors;
 
 @Document
 public class ApplicationUserEntity {
+    @Id
+    @JsonProperty
+    private String id;
 
     // TODO:May have to make a sub-entities for diff kinds of users(ADMIN/EMPLOYEES/CUSTOMERS)
     // This Entity is supposed primarily represent the customers
@@ -69,6 +74,14 @@ public class ApplicationUserEntity {
         this.faxNumber = faxNumber;
         this.hasQuickBookAccount = hasQuickBookAccount;
         this.authorities = authorities;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUsername() {

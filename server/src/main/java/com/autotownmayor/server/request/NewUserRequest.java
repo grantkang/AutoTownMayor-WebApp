@@ -1,25 +1,51 @@
 package com.autotownmayor.server.request;
 
+import com.autotownmayor.server.config.ApplicationConstant;
+
+import javax.validation.constraints.*;
 import java.util.List;
 
 public class NewUserRequest {
+    @NotNull
+    @Min(ApplicationConstant.USERNAME_MIN_LENGTH)
+    @Max(ApplicationConstant.USERNAME_MAX_LENGTH)
+    @Pattern(regexp=ApplicationConstant.USERNAME_PATTERN)
     private String username;
-    private String unHashedPassword;
+
+    @NotNull
+    @Min(ApplicationConstant.PASSWORD_MIN_LENGTH)
+    @Max(ApplicationConstant.PASSWORD_MAX_LENGTH)
+    private String unhashedPassword;
 
     private String firstName;
+
     private String lastName;
+
     private String companyName;
+
+    @NotNull
+    @Email
     private String email;
+
     private String resaleNumber;
+
     private String addressLine1;
+
     private String addressLine2;
+
     private String addressCity;
+
     private String addressState;
+
     private String addressZip;
+
     private String mainPhone;
+
     private String workPhone;
+
     private String faxNumber;
-    private boolean hasQuickBookAccount;
+
+    private boolean hasQuickBooksAccount;
 
     private List<String> authorities;
 
@@ -27,10 +53,10 @@ public class NewUserRequest {
         super();
     }
 
-    public NewUserRequest(String username, String unHashedPassword, String firstName, String lastName, String companyName, String email) {
+    public NewUserRequest(String username, String unhashedPassword, String firstName, String lastName, String companyName, String email) {
         super();
         this.username = username;
-        this.unHashedPassword = unHashedPassword;
+        this.unhashedPassword = unhashedPassword;
         this.firstName = firstName;
         this.lastName = lastName;
         this.companyName = companyName;
@@ -45,12 +71,12 @@ public class NewUserRequest {
         this.username = username;
     }
 
-    public String getUnHashedPassword() {
-        return unHashedPassword;
+    public String getUnhashedPassword() {
+        return unhashedPassword;
     }
 
-    public void setUnHashedPassword(String password) {
-        this.unHashedPassword = password;
+    public void setUnhashedPassword(String password) {
+        this.unhashedPassword = password;
     }
 
     public String getFirstName() {
@@ -157,12 +183,12 @@ public class NewUserRequest {
         this.faxNumber = faxNumber;
     }
 
-    public boolean hasQuickBookAccount() {
-        return hasQuickBookAccount;
+    public boolean hasQuickBooksAccount() {
+        return hasQuickBooksAccount;
     }
 
-    public void setHasQuickBookAccount(boolean hasQuickBookAccount) {
-        this.hasQuickBookAccount = hasQuickBookAccount;
+    public void setHasQuickBooksAccount(boolean hasQuickBookAccount) {
+        this.hasQuickBooksAccount = hasQuickBookAccount;
     }
 
     public List<String> getAuthorities() {

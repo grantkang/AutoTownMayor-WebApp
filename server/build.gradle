@@ -26,6 +26,7 @@ repositories {
 	maven { url "https://repo.spring.io/milestone" }
 	maven { url 'https://repo.spring.io/libs-snapshot' }
 	maven { url 'https://mvnrepository.com/artifact/org.apache.axis/axis' }
+	maven { url 'https://mvnrepository.com/artifact/commons-lang/commons-lang' }
 }
 
 
@@ -42,5 +43,7 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	//testCompile('org.springframework.security:spring-security-test')
 	compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.1'
+	compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+
 
 }

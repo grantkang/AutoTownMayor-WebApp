@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.autotownmayor.server.converter.SalesItemResponsePriceRemover;
 import com.autotownmayor.server.persistence.enums.AuthorityName;
@@ -12,8 +13,10 @@ import com.autotownmayor.server.tools.QbItemListToMongoImporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.autotownmayor.server.converter.SalesItemEntityToSalesItemResponseConverter;
@@ -78,19 +81,21 @@ public class SalesItemResource {
 
     @RestSecurity(AuthorityName.ROLE_ADMIN)
     @RequestMapping(path = ResourceConstants.UPLOAD_ITEM_LIST, method=RequestMethod.POST)
-    public void uploadItemList(@RequestParam("file") MultipartFile file) throws IOException {
-        try {
-            QbItemListToMongoImporter qbItemListToMongoImporter = new QbItemListToMongoImporter();
-            File convFile = new File(file.getOriginalFilename());
-            convFile.createNewFile();
-            FileOutputStream fos = new FileOutputStream(convFile);
-            fos.write(file.getBytes());
-            fos.close();
-            List<SalesItemEntity> items = qbItemListToMongoImporter.importFromCsv(convFile);
+    public ResponseEntity<Void> uploadItemList(@RequestParam("file") MultipartFile file) throws IOException {
+        QbItemListToMongoImporter qbItemListToMongoImporter = new QbItemListToMongoImporter();
+        File convFile = new File(file.getOriginalFilename());
+        convFile.createNewFile();
+        FileOutputStream fos = new FileOutputStream(convFile);
+        fos.write(file.getBytes());
+        fos.close();
+        List<SalesItemEntity> items = qbItemListToMongoImporter.importFromCsv(convFile);
+        items = items.stream().filter(item -> (item.getActiveStatus().equals("Active"))).collect(Collectors.toList());
+        if(items != null && items.size() != 0) {
             salesItemRepository.deleteAll();
             salesItemRepository.saveAll(items);
-        } catch (IOException e) {
-            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 }

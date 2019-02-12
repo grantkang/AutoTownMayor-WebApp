@@ -1,9 +1,12 @@
 package com.autotownmayor.server.converter;
 
 import com.autotownmayor.server.persistence.entity.ApplicationUserEntity;
+import com.autotownmayor.server.persistence.enums.AuthorityName;
 import com.autotownmayor.server.request.NewUserRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
 public class NewUserRequestToApplicationUserEntityConverter implements Function<NewUserRequest,ApplicationUserEntity> {
@@ -11,10 +14,11 @@ public class NewUserRequestToApplicationUserEntityConverter implements Function<
 
     @Override
     public ApplicationUserEntity apply(NewUserRequest source) {
+
         BCryptPasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
         ApplicationUserEntity user = new ApplicationUserEntity();
         user.setUsername(source.getUsername());
-        user.setPassword(bcryptPasswordEncoder.encode(source.getUnHashedPassword()));
+        user.setPassword(bcryptPasswordEncoder.encode(source.getUnhashedPassword()));
         user.setFirstName(source.getFirstName());
         user.setLastName(source.getLastName());
         user.setCompanyName(source.getCompanyName());
@@ -26,7 +30,15 @@ public class NewUserRequestToApplicationUserEntityConverter implements Function<
         user.setMainPhone(source.getMainPhone());
         user.setWorkPhone(source.getWorkPhone());
         user.setFaxNumber(source.getFaxNumber());
-        user.setHasQuickBookAccount(source.hasQuickBookAccount());
+        user.setHasQuickBookAccount((source.hasQuickBooksAccount()));
+        user.setAuthorities((source.getAuthorities() == null) ? getDefaultAuthorities() : source.getAuthorities());
+
         return user;
+    }
+
+    private List<String> getDefaultAuthorities() {
+        List<String> res = new ArrayList<>();
+        res.add(AuthorityName.ROLE_USER.getName());
+        return res;
     }
 }
