@@ -22,6 +22,9 @@ import {
   MatFormFieldModule
 } from '@angular/material/form-field';
 import {
+  MatStepperModule
+} from '@angular/material/stepper';
+import {
   MatSelectModule
 } from '@angular/material/select';
 import {
@@ -42,6 +45,7 @@ import {
       MatPaginatorModule,
       MatSelectModule,
       MatSidenavModule,
+      MatStepperModule,
       MatSnackBarModule,
       MatTableModule,
       MatToolbarModule
@@ -59,6 +63,7 @@ import {
       MatPaginatorModule,
       MatSelectModule,
       MatSidenavModule,
+      MatStepperModule,
       MatSnackBarModule,
       MatTableModule,
       MatToolbarModule

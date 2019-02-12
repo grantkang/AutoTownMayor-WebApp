@@ -1,9 +1,11 @@
 import * as AuthActions from './auth.actions';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { MyJwt } from '../model/my-jwt.model';
 
 export interface State {
   token: string;
   authenticated: boolean;
+  user: MyJwt;
 }
 
 const initialState: State = getInitialAuthState();
@@ -19,7 +21,8 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
       return {
         ...state,
         token: null,
-        authenticated: false
+        authenticated: false,
+        user: null
       };
     case AuthActions.SET_TOKEN:
       return {
@@ -30,6 +33,11 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
       return {
         ...state
       };
+    case AuthActions.SET_USER:
+      return {
+        ...state,
+        user: action.payload
+      };
     default:
       return state;
   }
@@ -38,15 +46,18 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
 function getInitialAuthState(): State {
   const unauthorizedState: State = {
     token: null,
-    authenticated: false
+    authenticated: false,
+    user: null
   };
 
+  const jwtHelper: JwtHelperService = new JwtHelperService();
   const token: string = localStorage.getItem('token');
 
   if (isTokenValid(token)) {
     return {
       token: token,
-      authenticated: true
+      authenticated: true,
+      user: jwtHelper.decodeToken(token)
     };
   } else {
     return unauthorizedState;

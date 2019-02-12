@@ -1,0 +1,5 @@
+<h2>Item List Upload</h2>
+<form [formGroup]="fileUploadFormGroup" (ngSubmit)="onSubmit()">
+  <input type="file" (change)="onFileSelected($event)">
+  <button mat-raised-button type="submit" color="primary">Upload</button>
+</form>

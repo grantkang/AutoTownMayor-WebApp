@@ -8,18 +8,22 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './store/auth.effects';
 import { authReducer } from './store/auth.reducers';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
     SharedModule,
-    StoreModule.forFeature('products', authReducer),
+    StoreModule.forFeature('auth', authReducer),
     EffectsModule.forFeature([AuthEffects])
   ],
   exports: [

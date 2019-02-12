@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">
+  <div fxShow fxHide.lt-md=true id="content" >
+      <button mat-button routerLink='/admin' routerLinkActive="active">
+        <img width="35" src="../assets/images/ATM_logo.png"/><b style="font-family:Eras ITC;font-size:150%">{{title}} [Admin]</b>
+      </button>
+  </div>
+  <div fxShow fxHide.gt-sm=true id="content" >
+    <button mat-button routerLink='/admin' routerLinkActive="active">
+      <img width="35" src="../assets/images/ATM_logo.png"/><b style="font-family:Eras ITC;font-size:150%">{{title}} [ADM]</b>
+    </button>
+    <!-- <button mat-button [matMenuTriggerFor]="menu"><mat-icon>expand_more</mat-icon></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/#" routerLinkActive="active">
+        Item 1
+      </button>
+    </mat-menu> -->
+  </div>
+  <div fxFlex="" fxFlexAlign="end end" style="text-align: right; font-size:75%">
+    <span *ngIf="!(authState | async).authenticated" routerLink="/login" style="cursor: pointer;">Login</span>
+    <button mat-button [matMenuTriggerFor]="menu2" *ngIf="(authState | async).authenticated"><mat-icon>account_box</mat-icon></button>
+    <mat-menu #menu2="matMenu">
+      <button mat-menu-item routerLink="/promo" routerLinkActive="active">
+        Return to Homepage
+      </button>
+      <button *ngIf="(authState | async).user && (authState | async).user.permissions.includes(adminRoleName)" mat-menu-item routerLink="/admin" routerLinkActive="active">Admin Dashboard</button>
+      <button mat-menu-item (click)="onLogout()">
+        Logout
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

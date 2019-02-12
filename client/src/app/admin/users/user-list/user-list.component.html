@@ -1,0 +1,16 @@
+<h2>User List</h2>
+<mat-table #table [dataSource]="(userState | async).userList">
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;" style="cursor: pointer;"></mat-row>
+
+  <ng-container matColumnDef="username">
+    <mat-header-cell *matHeaderCellDef> Username </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="companyName">
+    <mat-header-cell *matHeaderCellDef> Company Name </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.companyName}} </mat-cell>
+  </ng-container>
+
+</mat-table>

@@ -10,6 +10,9 @@ import { Observable } from 'rxjs';
 import * as AuthActions from './auth.actions';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppConstant } from '../../app.constant';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { User } from '../../shared/model/user.model';
+import { MyJwt } from '../model/my-jwt.model';
 
 @Injectable()
 export class AuthEffects {
@@ -27,7 +30,13 @@ export class AuthEffects {
         }),
         mergeMap((token: string) => {
           localStorage.setItem('token', token);
-          this.router.navigate(['/']);
+          const jwtHelper: JwtHelperService = new JwtHelperService();
+          const jwtInfo: MyJwt = jwtHelper.decodeToken(token);
+          if (jwtInfo.permissions.includes(AppConstant.ADMIN_ROLENAME)) {
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/']);
+          }
           return [
             {
               type: AuthActions.SIGNIN
@@ -35,6 +44,10 @@ export class AuthEffects {
             {
               type: AuthActions.SET_TOKEN,
               payload: token
+            },
+            {
+              type: AuthActions.SET_USER,
+              payload: jwtInfo
             }
           ];
         }),
@@ -50,6 +63,53 @@ export class AuthEffects {
           localStorage.clear();
           this.router.navigate(['/']);
         }));
+
+    @Effect({dispatch: false})
+    authResetPassword = this.actions$
+        .ofType(AuthActions.RESET_PASSWORD).pipe(
+          map((action: AuthActions.ResetPassword) => {
+            return action.payload;
+          }),
+          switchMap((resetPasswordInfo: { username: string, email: string}) => {
+            const body = JSON.stringify(resetPasswordInfo);
+            const headers = new HttpHeaders().set('Content-Type', 'application/json');
+            const url = AppConstant.BASE_URL + AppConstant.USER_PASSWORD_RESET_URL;
+            return this.httpClient.post(url, body, {
+              headers: headers
+            });
+          }),
+          map(
+            (response) => {
+              this.router.navigate(['/']);
+            },
+            (error) => {
+              console.log(error);
+            })
+        );
+
+    @Effect({dispatch: false})
+    authChangePassword = this.actions$
+            .ofType(AuthActions.CHANGE_PASSWORD).pipe(
+              map((action: AuthActions.ChangePassword) => {
+                return action.payload;
+              }),
+              switchMap((passwordInfo: {password: string}) => {
+                const body = JSON.stringify(passwordInfo);
+                const headers = new HttpHeaders().set('Content-Type', 'application/json');
+                const url = AppConstant.BASE_URL + AppConstant.USER_PASSWORD_CHANGE_URL;
+                return this.httpClient.post(url, body, {
+                  headers: headers
+                });
+              }),
+              map(
+                (response) => {
+                  console.log('Password change success!');
+                },
+                (error) => {
+                  console.log('Password change failure!');
+                }
+              )
+            )
 
     constructor(private actions$: Actions, private router: Router, private httpClient: HttpClient) {}
 }

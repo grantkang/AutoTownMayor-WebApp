@@ -13,8 +13,6 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private store: Store<fromApp.AppState>) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('Intercepted!', req);
-
     const jwtHelper: JwtHelperService = new JwtHelperService();
     const myToken = localStorage.getItem('token');
     const originalURL = req.url;
@@ -44,9 +42,9 @@ export class AuthInterceptor implements HttpInterceptor {
     }
   }
 
+  // TODO: This is replacing the header not appending
   appendAuthorizationHeader(req: HttpRequest<any>, token: string) {
-    const authHeader = new HttpHeaders({'Authorization': `Bearer ${token}`});
-    return req.clone({headers: authHeader});
+    return req.clone({headers: req.headers.append('Authorization', `Bearer ${token}`)});
   }
 
   getLastPathVariable(url: string): string {

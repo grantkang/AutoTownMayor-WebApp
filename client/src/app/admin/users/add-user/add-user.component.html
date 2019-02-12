@@ -1,0 +1,349 @@
+<!-- <div class="form-container">
+  <form [formGroup]="newUserForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="start center">
+    <h2>New User</h2>
+    <mat-form-field class="form-input">
+      <input
+        matInput
+        id="username"
+        formControlName="username"
+        placeholder="Username"
+        type="text">
+      <mat-error *ngIf="newUserForm.get('username').hasError('required')">This field is required.</mat-error>
+      <mat-error *ngIf="newUserForm.get('username').hasError('minlength')">Username must be longer than {{usernameMinLength}} characters.</mat-error>
+      <mat-error *ngIf="newUserForm.get('username').hasError('maxlength')">Username must be shorter than {{usernameMaxLength}} characters.</mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-input">
+      <input
+        matInput
+        id="password"
+        formControlName="password"
+        placeholder="Password"
+        type="password">
+      <mat-error *ngIf="newUserForm.get('password').hasError('required')">This field is required.</mat-error>
+      <mat-error *ngIf="newUserForm.get('password').hasError('minlength')">Password must be longer than {{passwordMinLength}} characters.</mat-error>
+      <mat-error *ngIf="newUserForm.get('password').hasError('maxlength')">Password must be shorter than {{passwordMaxLength}} characters.</mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-input">
+      <input
+        matInput
+        id="companyName"
+        formControlName="companyName"
+        placeholder="CompanyName"
+        type="text">
+        <mat-error *ngIf="newUserForm.get('companyName').hasError('required')">This field is required.</mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-input">
+      <input
+        matInput id="email"
+        formControlName="email"
+        placeholder="E-mail"
+        type="email">
+      <mat-error *ngIf="newUserForm.get('email').hasError('required')">This field is required.</mat-error>
+      <mat-error *ngIf="newUserForm.get('email').hasError('email')">Please enter a valid email.</mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-input">
+      <input
+        matInput
+        id="resaleNumber"
+        formControlName="resaleNumber"
+        placeholder="Resale No."
+        type="text">
+        <mat-error *ngIf="newUserForm.get('resaleNumber').hasError('required')">This field is required.</mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-input">
+      <input
+        matInput
+        id="firstName"
+        formControlName="firstName"
+        placeholder="First Name"
+        type="text">
+    </mat-form-field>
+    <mat-form-field class="form-input">
+      <input
+        matInput id="lastName"
+        formControlName="lastName"
+        placeholder="Last Name"
+        type="text">
+    </mat-form-field>
+    <mat-form-field class="form-input">
+      <input
+        matInput
+        id="addressLine1"
+        formControlName="addressLine1"
+        placeholder="Address Line 1"
+        type="text">
+    </mat-form-field>
+    <mat-form-field class="form-input">
+      <input
+        matInput
+        id="addressLine2"
+        formControlName="addressLine2"
+        placeholder="Address Line 2"
+        type="text">
+    </mat-form-field>
+    <mat-form-field class="form-input">
+      <input
+        matInput id="addressCity"
+        formControlName="addressCity"
+        placeholder="City"
+        type="text">
+    </mat-form-field>
+    <mat-form-field class="form-input">
+      <input
+        matInput
+        id="addressState"
+        formControlName="addressState"
+        placeholder="State"
+        type="text">
+    </mat-form-field>
+    <mat-form-field class="form-input">
+      <input
+        matInput
+        id="addressZip"
+        formControlName="addressZip"
+        placeholder="Zip"
+        type="text">
+    </mat-form-field>
+    <mat-form-field class="form-input">
+      <input
+        matInput
+        id="mainPhone"
+        formControlName="mainPhone"
+        placeholder="Main Phone"
+        type="text">
+      <mat-error *ngIf="newUserForm.get('mainPhone').hasError('required')">This field is required.</mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-input">
+      <input
+        matInput
+        id="workPhone"
+        formControlName="workPhone"
+        placeholder="Work Phone"
+        type="text">
+    </mat-form-field>
+    <mat-form-field class="form-input">
+      <input
+        matInput
+        id="faxNumber"
+        formControlName="faxNumber"
+        placeholder="Fax Number"
+        type="text">
+    </mat-form-field>
+
+
+    <button mat-raised-button type="submit" color="primary" [disabled]="!newUserForm.valid">
+      Submit
+    </button>
+  </form>
+</div> -->
+
+<h2>Add User</h2>
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="userLoginFormGroup">
+    <form [formGroup]="userLoginFormGroup">
+      <ng-template matStepLabel>Login Info</ng-template>
+      <mat-form-field class="form-input">
+        <input
+          matInput
+          id="username"
+          formControlName="username"
+          placeholder="Username"
+          type="text">
+        <mat-error *ngIf="userLoginFormGroup.get('username').hasError('required')">This field is required.</mat-error>
+        <mat-error *ngIf="userLoginFormGroup.get('username').hasError('invalidUsernameLength')">{{validationService.getValidatorErrorMessage('invalidUsernameLength')}}</mat-error>
+        <mat-error *ngIf="userLoginFormGroup.get('username').hasError('invalidUsername')">Invalid Username</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-input">
+        <input
+          matInput
+          id="password"
+          formControlName="password"
+          placeholder="Password"
+          type="password">
+        <mat-error *ngIf="userLoginFormGroup.get('password').hasError('required')">This field is required.</mat-error>
+        <mat-error *ngIf="userLoginFormGroup.get('password').hasError('invalidPasswordLength')">{{validationService.getValidatorErrorMessage('invalidPasswordLength')}}</mat-error>
+        <mat-error *ngIf="userLoginFormGroup.get('password').hasError('invalidPassword')">{{validationService.getValidatorErrorMessage('invalidPassword')}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-input">
+        <input
+          matInput id="email"
+          formControlName="email"
+          placeholder="E-mail"
+          type="email">
+        <mat-error *ngIf="userLoginFormGroup.get('email').hasError('required')">This field is required.</mat-error>
+        <mat-error *ngIf="userLoginFormGroup.get('email').hasError('invalidEmailAddress')">Please enter a valid email.</mat-error>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext color="primary" [disabled]="!userLoginFormGroup.valid">Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="userCompanyInfoFormGroup">
+    <form [formGroup]="userCompanyInfoFormGroup">
+      <ng-template matStepLabel>Company Info</ng-template>
+      <mat-form-field class="form-input">
+        <input
+          matInput
+          id="companyName"
+          formControlName="companyName"
+          placeholder="CompanyName"
+          type="text">
+          <mat-error *ngIf="userCompanyInfoFormGroup.get('companyName').hasError('required')">This field is required.</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-input">
+        <input
+          matInput
+          id="resaleNumber"
+          formControlName="resaleNumber"
+          placeholder="Resale No."
+          type="text">
+          <mat-error *ngIf="userCompanyInfoFormGroup.get('resaleNumber').hasError('required')">This field is required.</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-input">
+        <input
+          matInput
+          id="addressLine1"
+          formControlName="addressLine1"
+          placeholder="Address Line 1"
+          type="text">
+      </mat-form-field>
+      <mat-form-field class="form-input">
+        <input
+          matInput
+          id="addressLine2"
+          formControlName="addressLine2"
+          placeholder="Address Line 2"
+          type="text">
+      </mat-form-field>
+      <mat-form-field class="form-input">
+        <input
+          matInput id="addressCity"
+          formControlName="addressCity"
+          placeholder="City"
+          type="text">
+      </mat-form-field>
+      <mat-form-field class="form-input">
+        <input
+          matInput
+          id="addressState"
+          formControlName="addressState"
+          placeholder="State"
+          type="text">
+      </mat-form-field>
+      <mat-form-field class="form-input">
+        <input
+          matInput
+          id="addressZip"
+          formControlName="addressZip"
+          placeholder="Zip"
+          type="text">
+      </mat-form-field>
+    </form>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext [disabled]="!userCompanyInfoFormGroup.valid">Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step [stepControl]="userBasicInfoFormGroup">
+    <form [formGroup]="userBasicInfoFormGroup">
+      <ng-template matStepLabel>Basic Info</ng-template>
+      <mat-form-field class="form-input">
+        <input
+          matInput
+          id="firstName"
+          formControlName="firstName"
+          placeholder="First Name"
+          type="text">
+      </mat-form-field>
+      <mat-form-field class="form-input">
+        <input
+          matInput id="lastName"
+          formControlName="lastName"
+          placeholder="Last Name"
+          type="text">
+      </mat-form-field>
+      <mat-form-field class="form-input">
+        <input
+          matInput
+          id="mainPhone"
+          formControlName="mainPhone"
+          placeholder="Main Phone"
+          type="text">
+        <mat-error *ngIf="userBasicInfoFormGroup.get('mainPhone').hasError('required')">This field is required.</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-input">
+        <input
+          matInput
+          id="workPhone"
+          formControlName="workPhone"
+          placeholder="Work Phone"
+          type="text">
+      </mat-form-field>
+      <mat-form-field class="form-input">
+        <input
+          matInput
+          id="faxNumber"
+          formControlName="faxNumber"
+          placeholder="Fax Number"
+          type="text">
+      </mat-form-field>
+    </form>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext [disabled]="!userBasicInfoFormGroup.valid">Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Confirm</ng-template>
+    <h3>
+      Login Info
+    </h3>
+    <mat-list>
+      <mat-list-item>
+        Username: {{userLoginFormGroup.get('username').value}}
+      </mat-list-item>
+      <mat-list-item>
+        Password: {{(isPasswordVisible) ? userLoginFormGroup.get('password').value : userLoginFormGroup.get('password').value | bullet }}
+        <mat-icon (click)="togglePasswordVisibility()" *ngIf="!isPasswordVisible" style="cursor: pointer;">visibility</mat-icon>
+        <mat-icon (click)="togglePasswordVisibility()" *ngIf="isPasswordVisible" style="cursor: pointer;">visibility_off</mat-icon>
+      </mat-list-item>
+      <mat-list-item>
+        E-mail: {{userLoginFormGroup.get('email').value}}
+      </mat-list-item>
+    </mat-list>
+
+    <h3>
+      Company Info
+    </h3>
+      <mat-list>
+        <mat-list-item>
+          Company Name: {{userCompanyInfoFormGroup.get('companyName').value}}
+        </mat-list-item>
+        <mat-list-item>
+          Resale Number: {{userCompanyInfoFormGroup.get('resaleNumber').value}}
+        </mat-list-item>
+        <mat-list-item>
+          Address Line 1: {{userCompanyInfoFormGroup.get('addressLine1').value}}
+        </mat-list-item>
+        <mat-list-item>
+          Address Line 2: {{userCompanyInfoFormGroup.get('addressLine2').value}}
+        </mat-list-item>
+        <mat-list-item>
+          City: {{userCompanyInfoFormGroup.get('addressCity').value}}
+        </mat-list-item>
+        <mat-list-item>
+          State: {{userCompanyInfoFormGroup.get('addressState').value}}
+        </mat-list-item>
+        <mat-list-item>
+          Zip: {{userCompanyInfoFormGroup.get('addressZip').value}}
+        </mat-list-item>
+      </mat-list>
+    <div>
+        <button mat-button matStepperPrevious>Back</button>
+      <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!userLoginFormGroup.valid || !userBasicInfoFormGroup.valid || !userCompanyInfoFormGroup.valid">Submit</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

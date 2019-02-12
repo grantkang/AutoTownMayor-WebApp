@@ -4,6 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxCarouselModule } from 'ngx-carousel';
 
 import { MaterialModule } from './module/material.module';
+import { PipeModule } from '../pipe/pipe.module';
 
 /*  TODO: Figure out which modules to belong exclusively to Shared/App modules
  *        Most guides tell me to have some of these modules in just the App module
