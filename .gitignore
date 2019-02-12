@@ -4,3 +4,7 @@ server/src/main/resources/application-prod\.properties
 client/src/environments/environment\.prod\.ts
 
 client/src/assets/images/items/unavailable/
+
+*.csv
+
+client/src/assets/images/items/
