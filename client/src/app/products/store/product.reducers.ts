@@ -14,7 +14,7 @@ export interface State {
   currentProduct: SalesItem
 }
 
-const initialState = {
+const initialState: State = {
   pageableProductList: new PageableProductList(new MatTableDataSource([]), 0, 0, true, true, 0, 0),
   currentProduct: new SalesItem()
 }

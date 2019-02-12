@@ -19,46 +19,22 @@ const initialState = {
   carouselItems: [
     new PromoCarouselItem(
       'Promotional Flyer #1',
-      '../assets/documents/flyers/TestFlyer01.pdf',
-      '../assets/images/flyers/TestBanner01.png'),
+      '.',
+      '../assets/images/banners/promo_banner.png'),
     new PromoCarouselItem(
       'Promotional Flyer #2',
-      '../assets/documents/flyers/TestFlyer02.pdf',
-      '../assets/images/flyers/TestBanner02.png'),
-    new PromoCarouselItem(
-      'Promotional Flyer #3',
-      '../assets/documents/flyers/TestFlyer03.pdf',
-      '../assets/images/flyers/TestBanner03.png'),
-    new PromoCarouselItem(
-      'Promotional Flyer #4',
-      '../assets/documents/flyers/TestFlyer04.pdf',
-      '../assets/images/flyers/TestBanner04.png'),
-    new PromoCarouselItem(
-      'Promotional Flyer #5',
-      '../assets/documents/flyers/TestFlyer05.pdf',
-      '../assets/images/flyers/TestBanner05.png')
+      '.',
+      '../assets/images/banners/promo_banner_02.png')
   ],
   gridItems: [
     new PromoGridItem(
       'Catalog #1',
-      '../assets/documents/flyers/TestFlyer01.pdf',
-      '../assets/images/flyers/TestBanner01.png'),
+      '../assets/documents/flyers/lubeflow_flyer_v2.pdf',
+      '../assets/images/banners/TestBanner01.png'),
     new PromoGridItem(
       'Catalog #2',
-      '../assets/documents/flyers/TestFlyer02.pdf',
-      '../assets/images/flyers/TestBanner02.png'),
-    new PromoGridItem(
-      'Catalog #3',
-      '../assets/documents/flyers/TestFlyer03.pdf',
-      '../assets/images/flyers/TestBanner03.png'),
-    new PromoGridItem(
-      'Catalog #4',
-      '../assets/documents/flyers/TestFlyer04.pdf',
-      '../assets/images/flyers/TestBanner04.png'),
-    new PromoGridItem(
-      'Catalog #5',
-      '../assets/documents/flyers/TestFlyer05.pdf',
-      '../assets/images/flyers/TestBanner05.png')
+      '../assets/documents/flyers/quaker_flyer.pdf',
+      '../assets/images/banners/TestBanner02.png'),
   ]
 }
 

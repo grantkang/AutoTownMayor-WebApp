@@ -17,16 +17,17 @@ import { AppConstant } from '../../app.constant';
 @Injectable()
 export class ProductEffects {
 
-
   @Effect()
   pageableProductListFetch = this.actions$
     .ofType(ProductActions.FETCH_PAGEABLE_PRODUCT_LIST).pipe(
     switchMap((action: ProductActions.FetchPageableProductList) => {
       const pageNumber = action.payload.page.toString();
       const nameFilter = action.payload.nameFilter;
-      const categoryFilter = action.payload.categoryFilter;
+      const categoryFilter: string[] = action.payload.categoryFilter;
       const requestURL = AppConstant.BASE_URL + AppConstant.ITEMS_URL;
       let params = new HttpParams().set('page', pageNumber);
+      params = params.append('sort', 'name');
+      params = params.append('name.dir', 'desc');
       if (action.payload.nameFilter != null) {
         params = params.append('nameFilter', nameFilter);
       }
@@ -35,7 +36,6 @@ export class ProductEffects {
           params = params.append('categoryFilter', category)
         });
       }
-
       return this.httpClient.get<PageableProductList>(requestURL, {params: params});
     }),
     map(

@@ -24,15 +24,15 @@ export class ProductListFilterComponent implements OnInit {
   ngOnInit() {
     this.productState = this.store.select('products');
     this.filterForm = new FormGroup({
-      nameFilter: new FormControl(),
-      categoryFilter: new FormControl()
+      nameFilter: new FormControl(this.route.snapshot.queryParamMap.get('page')),
+      categoryFilter: new FormControl(this.route.snapshot.queryParamMap.getAll('categoryFilter'))
     });
   }
 
   onSubmit() {
     this.router.navigate(['.'], { relativeTo: this.route, queryParams:
       {
-        page: this.route.snapshot.params.page,
+        page: null,
         nameFilter: this.filterForm.value.nameFilter,
         categoryFilter: this.filterForm.value.categoryFilter
       }

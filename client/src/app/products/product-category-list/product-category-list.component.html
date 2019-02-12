@@ -1,0 +1,12 @@
+<span>Product Categories</span>
+<div
+  fxFlex=""
+  fxLayout="row wrap"
+  fxLayoutAlign="center">
+  <app-product-category-list-item
+        *ngFor="let categoryEl of categories; let i = index"
+        [category]="categoryEl"
+        [index]="i"
+        (click)="onClick(categoryEl)"
+        style="cursor: pointer;"></app-product-category-list-item>
+</div>

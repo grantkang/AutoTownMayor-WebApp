@@ -8,13 +8,18 @@
   </mat-form-field> -->
   <app-product-list-filter>
   </app-product-list-filter>
-  <mat-table #table [dataSource]="(productState | async).pageableProductList.salesItems">
+  <mat-table #table [dataSource]="(productState | async).pageableProductList?.salesItems">
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelectElement(row)" style="cursor: pointer;"></mat-row>
 
     <ng-container matColumnDef="type">
       <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.category | uppercase}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="image">
+      <mat-header-cell *matHeaderCellDef> Image </mat-header-cell>
+      <mat-cell *matCellDef="let element"><app-product-image-loader [item]="element" height="200"></app-product-image-loader></mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="name">
@@ -35,9 +40,9 @@
 
   </mat-table>
   <mat-paginator
-    [pageSize]="(productState | async).pageableProductList.size"
-    [pageIndex]="(productState | async).pageableProductList.number"
-    [length]="(productState | async).pageableProductList.totalElements"
+    [pageSize]="(productState | async).pageableProductList?.size"
+    [pageIndex]="(productState | async).pageableProductList?.number"
+    [length]="(productState | async).pageableProductList?.totalElements"
     (page)="onNextPage($event)">
   </mat-paginator>
 </div>

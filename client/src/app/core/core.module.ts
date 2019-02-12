@@ -12,12 +12,14 @@ import { HeaderComponent } from './header/header.component';
 import { ContactComponent } from './contact/contact.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../shared/interceptor/auth.interceptor';
+import { CoreComponent } from './core.component';
 
 @NgModule({
   declarations: [
     ContactComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    CoreComponent
   ],
   imports: [
     AppRoutingModule,
@@ -31,6 +33,7 @@ import { AuthInterceptor } from '../shared/interceptor/auth.interceptor';
   exports: [
     AppRoutingModule,
     ContactComponent,
+    CoreComponent,
     FooterComponent,
     HeaderComponent
   ],

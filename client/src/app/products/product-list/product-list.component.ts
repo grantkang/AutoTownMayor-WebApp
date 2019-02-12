@@ -1,11 +1,8 @@
 import { Store } from '@ngrx/store';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-
+import { ActivatedRoute, Params, Router, ParamMap } from '@angular/router';
 
 import { Observable } from 'rxjs';
-
-import { PageableProductList } from './product-list-pageable.model';
 
 import * as ProductActions from '../store/product.actions';
 import * as fromProduct from '../store/product.reducers';
@@ -14,11 +11,12 @@ import * as fromProduct from '../store/product.reducers';
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: [
+    './product-list.component.css'
   ],
 })
 export class ProductListComponent implements OnInit {
   currentPage: number;
-  displayedColumns = ['type', 'name', 'price', 'quantity'];
+  displayedColumns = ['type', 'image', 'name', 'price', 'quantity'];
   productState: Observable<fromProduct.State>;
 
   constructor(private store: Store<fromProduct.FeatureState>,
@@ -27,12 +25,12 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
     this.productState = this.store.select('products');
-    this.route.queryParams.subscribe(
-      (queryParams: Params) => {
+    this.route.queryParamMap.subscribe(
+      (queryParams: ParamMap) => {
         this.store.dispatch(new ProductActions.FetchPageableProductList({
-          page: +queryParams['page'],
-          nameFilter: queryParams['nameFilter'],
-          categoryFilter: queryParams['categoryFilter']
+          page: +queryParams.get('page'),
+          nameFilter: queryParams.get('nameFilter'),
+          categoryFilter: queryParams.getAll('categoryFilter')
         }
         ));
       }
@@ -51,6 +49,5 @@ export class ProductListComponent implements OnInit {
       categoryFilter: this.route.snapshot.queryParams.categoryFilter
     }});
   }
-
 
 }

@@ -66,6 +66,5 @@ export class PromoCarouselComponent implements OnInit {
   }
 
   onmoveFn(data: NgxCarouselStore) {
-    console.log(data);
   }
 }

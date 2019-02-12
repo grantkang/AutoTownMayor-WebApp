@@ -20,14 +20,14 @@ export class ContactEffects {
       return this.http.post(AppConstant.BASE_URL + AppConstant.CONTACT_URL, body, {
         headers: headers
       });
-    }),map(
+    }), map(
       (response) => {
         return 'success';
       },
       (error) => {
         return 'error';
       }
-    ),)
+    ), );
 
   constructor(private actions$: Actions,
     private http: HttpClient) {}

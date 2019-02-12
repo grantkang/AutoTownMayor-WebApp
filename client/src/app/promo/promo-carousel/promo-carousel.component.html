@@ -4,9 +4,8 @@
   (onMove)="onmoveFn($event)">
       <ngx-item NgxCarouselItem *ngFor="let carouselItem of (promoState | async).carouselItems">
         <div class="bannerStyle">
-          <a target="_blank" [href]="carouselItem.filepath">
-              <img [src]="carouselItem.bannerImgPath" [alt]="carouselItem.name">
-          </a>
+          <!-- May need anchor tag on some banners. -->
+          <img [src]="carouselItem.bannerImgPath" [alt]="carouselItem.name">
         </div>
       </ngx-item>
       <button NgxCarouselPrev class='leftRs'>&lt;</button>

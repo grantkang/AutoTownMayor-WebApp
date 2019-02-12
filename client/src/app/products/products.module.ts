@@ -12,13 +12,19 @@ import { SharedModule } from '../shared/shared.module';
 import { ProductListFilterComponent } from './product-list/product-list-filter/product-list-filter.component';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
+import { ProductImageLoaderComponent } from './product-image-loader/product-image-loader.component';
+import { ProductCategoryListComponent } from './product-category-list/product-category-list.component';
+import { ProductCategoryListItemComponent } from './product-category-list/product-category-list-item/product-category-list-item.component';
 
 @NgModule({
   declarations: [
     ProductDetailComponent,
+    ProductImageLoaderComponent,
     ProductListComponent,
     ProductListFilterComponent,
-    ProductsComponent
+    ProductsComponent,
+    ProductCategoryListComponent,
+    ProductCategoryListItemComponent
   ],
   imports: [
     CommonModule,

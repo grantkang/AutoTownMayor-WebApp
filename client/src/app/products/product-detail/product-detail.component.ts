@@ -16,6 +16,7 @@ import { SalesItem } from '../../shared/model/salesitem.model';
 export class ProductDetailComponent implements OnInit {
   productState: Observable<fromProduct.State>;
   imagePathPrefix = 'assets/images/items/';
+  imagePathSuffix = '.jpg'
   placeholderImagePathDefaultPrefix = 'unavailable/';
   placeholderImagePathDefaultSuffix = '_default_dev.jpg';
   // TODO: If both default/backup images are unavailable, replaceImages() gets called repeatedly. Include a backup image for misc./blank
