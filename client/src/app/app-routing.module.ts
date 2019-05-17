@@ -11,7 +11,7 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
 // TODO: Not sure if contacts should have it's own route since it's implemented as a dialog box in footer
 const routes: Routes = [
   {path: '', component: CoreComponent, children: [
-    { path: '', redirectTo: '/promo', pathMatch: 'full' },
+    { path: '', redirectTo: '/products/categories', pathMatch: 'full' },
     { path: 'about', component: CompanyInfoComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'login', component: LoginComponent },

@@ -4,6 +4,10 @@
   fxLayout="row wrap"
   fxLayoutAlign="center">
   <app-product-category-list-item
+    category="all products"
+    (click)="onClick(null)"
+    style="cursor: pointer;"></app-product-category-list-item>
+  <app-product-category-list-item
         *ngFor="let categoryEl of categories; let i = index"
         [category]="categoryEl"
         [index]="i"

@@ -8,7 +8,8 @@ import { ProductCategoryListComponent } from './product-category-list/product-ca
 
 const productsRoutes: Routes = [
   { path: '', component: ProductsComponent, children: [
-    { path: '', component: ProductListComponent },
+    { path: '', redirectTo: 'categories', pathMatch: 'full' },
+    { path: 'list', component: ProductListComponent },
     { path: 'item', component: ProductDetailComponent },
     { path: 'categories', component: ProductCategoryListComponent}
   ]}

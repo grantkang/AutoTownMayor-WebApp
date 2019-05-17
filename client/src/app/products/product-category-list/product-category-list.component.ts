@@ -16,6 +16,6 @@ export class ProductCategoryListComponent implements OnInit {
   }
 
   onClick(category) {
-    this.router.navigate(['../'], { relativeTo: this.route, queryParams: {categoryFilter: category}})
+    this.router.navigate(['../list'], { relativeTo: this.route, queryParams: {categoryFilter: category}})
   }
 }

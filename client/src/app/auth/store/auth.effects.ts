@@ -33,9 +33,9 @@ export class AuthEffects {
           const jwtHelper: JwtHelperService = new JwtHelperService();
           const jwtInfo: MyJwt = jwtHelper.decodeToken(token);
           if (jwtInfo.permissions.includes(AppConstant.ADMIN_ROLENAME)) {
-            this.router.navigate(['/admin']);
+            this.router.navigate(['/products/categories']);
           } else {
-            this.router.navigate(['/']);
+            this.router.navigate(['/products/categories']);
           }
           return [
             {

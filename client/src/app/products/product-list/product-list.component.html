@@ -12,10 +12,11 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelectElement(row)" style="cursor: pointer;"></mat-row>
 
-    <ng-container matColumnDef="type">
+    <ng-container matColumnDef="type" display="false">
       <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.category | uppercase}} </mat-cell>
     </ng-container>
+
 
     <ng-container matColumnDef="image">
       <mat-header-cell *matHeaderCellDef> Image </mat-header-cell>

@@ -1,11 +1,12 @@
 import { Store } from '@ngrx/store';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { ActivatedRoute, Params, Router, ParamMap } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
 import * as ProductActions from '../store/product.actions';
 import * as fromProduct from '../store/product.reducers';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-product-list',
@@ -16,14 +17,21 @@ import * as fromProduct from '../store/product.reducers';
 })
 export class ProductListComponent implements OnInit {
   currentPage: number;
-  displayedColumns = ['type', 'image', 'name', 'price', 'quantity'];
+  displayedColumns;
   productState: Observable<fromProduct.State>;
 
   constructor(private store: Store<fromProduct.FeatureState>,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private breakpointObserver: BreakpointObserver) { }
+
+  @HostListener('window:resize', ['$event'])
+  onresize(event) {
+    this.updateDisplayedColumns();
+  }
 
   ngOnInit() {
+    this.updateDisplayedColumns();
     this.productState = this.store.select('products');
     this.route.queryParamMap.subscribe(
       (queryParams: ParamMap) => {
@@ -48,6 +56,11 @@ export class ProductListComponent implements OnInit {
       nameFilter: this.route.snapshot.queryParams.nameFilter,
       categoryFilter: this.route.snapshot.queryParams.categoryFilter
     }});
+  }
+
+  updateDisplayedColumns() {
+    this.displayedColumns =
+      (this.breakpointObserver.isMatched('(min-width: 1337px')) ? ['type', 'image', 'name', 'price', 'quantity'] : ['image', 'name', 'price', 'quantity'];
   }
 
 }
