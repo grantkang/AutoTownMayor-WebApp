@@ -24,6 +24,7 @@ public class SalesItemEntity {
 	private String category;
 	private String brand;
 	private String imageUrl;
+	private String unpopular;
 	
 	//TODO: Maybe add List<ItemType> so we can let customers filter through items
 	
@@ -128,6 +129,14 @@ public class SalesItemEntity {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    // TODO: Figure out if you can store booleans in QBdatabase. Maybe we can store it as numbers.
+	@JsonProperty("UNPOPULAR")
+	public String getUnpopular() { return unpopular; }
+
+	public void setUnpopular(String unpopular) {
+		this.unpopular = unpopular;
+	}
 
     public String toString() {
 		return String.format("SalesItem[id=%s,activeStatus=%s,name=%s,description=%s,price=%.2f,qty=%d]", id,activeStatus,name,description,price,quantity);

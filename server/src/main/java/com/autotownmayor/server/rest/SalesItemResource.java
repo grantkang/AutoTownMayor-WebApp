@@ -89,7 +89,7 @@ public class SalesItemResource {
         fos.write(file.getBytes());
         fos.close();
         List<SalesItemEntity> items = qbItemListToMongoImporter.importFromCsv(convFile);
-        items = items.stream().filter(item -> (item.getActiveStatus().equals("Active"))).collect(Collectors.toList());
+        items = items.stream().filter(item -> (item.getActiveStatus().equals("Active"))).filter(item -> (item.getUnpopular().isEmpty())).collect(Collectors.toList());
         if(items != null && items.size() != 0) {
             salesItemRepository.deleteAll();
             salesItemRepository.saveAll(items);
