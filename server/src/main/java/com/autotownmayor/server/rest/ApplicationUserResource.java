@@ -24,6 +24,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -49,8 +50,10 @@ public class ApplicationUserResource {
     // TODO: Implement a way to check if the user info is valid (ie. password is at least X long and at most Y long)
     @RequestMapping(path=ResourceConstants.SIGN_UP, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @RestSecurity(AuthorityName.ROLE_ADMIN)
-    public ResponseEntity<Void> createNewUser(@RequestBody NewUserRequest req) {
-        applicationUserRepository.insert(new NewUserRequestToApplicationUserEntityConverter().apply(req));
+    public ResponseEntity<Void> createNewUser(@RequestBody NewUserRequest req) throws MessagingException {
+        ApplicationUserEntity newUser = new NewUserRequestToApplicationUserEntityConverter().apply(req);
+        applicationUserRepository.insert(newUser);
+        notificationService.sendNewUserNotification(newUser);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -82,9 +85,8 @@ public class ApplicationUserResource {
         }
     }
 
-
     @RequestMapping(path = ResourceConstants.RESET_PASSWORD, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Void> resetPassword(@RequestBody PasswordResetRequest req) {
+    public ResponseEntity<Void> resetPassword(@RequestBody PasswordResetRequest req) throws MessagingException {
         ApplicationUserEntity user = applicationUserRepository.findByUsernameIgnoreCase(req.getUsername());
         if (user != null && req.getEmail().equals(user.getEmail())) {
             String newPassword = RandomStringUtils.randomAlphanumeric(RandomUtils.nextInt(13) + 8);
@@ -99,9 +101,9 @@ public class ApplicationUserResource {
 
     // TODO: Create a JWT and send an email w/ a PasswordChange link with the JWT in the parameter. This and the resetPasswordEnd methods should replace the old way of resetting PW.
     @RequestMapping(path = ResourceConstants.RESET_PASSWORD_START, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Void> resetPasswordStart(@RequestBody PasswordResetRequest req) {
+    public ResponseEntity<Void> resetPasswordStart(@RequestBody PasswordResetRequest req) throws MessagingException {
         ApplicationUserEntity user = applicationUserRepository.findByUsernameIgnoreCase(req.getUsername());
-        if(req.getEmail().equals(user.getEmail())) {
+        if(user != null && req.getEmail().equals(user.getEmail())) {
             Map<String, Object> claims = new HashMap<>();
             claims.put("username",user.getUsername());
 
@@ -127,7 +129,7 @@ public class ApplicationUserResource {
         if(claims != null) {
             String username = claims.get("username").toString();
             ApplicationUserEntity user = applicationUserRepository.findByUsernameIgnoreCase(username);
-            user.setPassword(newPassword.getUnhashedPassword());
+            user.setPassword(bCryptPasswordEncoder.encode(newPassword.getUnhashedPassword()));
             applicationUserRepository.save(user);
             notificationService.sendSuccessfulPasswordReset(user);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -138,7 +140,7 @@ public class ApplicationUserResource {
 
 
     @RequestMapping(path = ResourceConstants.RECOVER_USERNAME, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Void> recoverUsername(@RequestBody UsernameRetrievalRequest req) {
+    public ResponseEntity<Void> recoverUsername(@RequestBody UsernameRetrievalRequest req) throws MessagingException {
         ApplicationUserEntity user = applicationUserRepository.findByEmailIgnoreCase(req.getEmail());
         if(user != null) {
             notificationService.sendUsernameRecoveryNotification(user);

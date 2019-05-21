@@ -31,6 +31,7 @@ public class NewUserRequestToApplicationUserEntityConverter implements Function<
         user.setWorkPhone(source.getWorkPhone());
         user.setFaxNumber(source.getFaxNumber());
         user.setHasQuickBookAccount((source.hasQuickBooksAccount()));
+        user.setEmail(source.getEmail());
         user.setAuthorities((source.getAuthorities() == null) ? getDefaultAuthorities() : source.getAuthorities());
 
         return user;

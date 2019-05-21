@@ -18,3 +18,5 @@ client/src/assets/images/banners/promo_banner_02\.png
 client/src/assets/images/banners/promo_banner\.png
 
 email-templates/*
+
+*.png
