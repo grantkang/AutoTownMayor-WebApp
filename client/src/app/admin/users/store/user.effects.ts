@@ -2,7 +2,7 @@
 import {map, switchMap} from 'rxjs/operators';
 
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import * as UserActions from './user.actions';
@@ -15,8 +15,8 @@ import { NewUserRequest } from '../../../shared/model/new-user-request.model';
 @Injectable()
 export class UserEffects {
   @Effect()
-  userListFetch = this.actions$
-  .ofType(UserActions.FETCH_USER_LIST).pipe(
+  userListFetch = this.actions$.pipe(
+  ofType(UserActions.FETCH_USER_LIST),
     switchMap(
       (action: UserActions.FetchUserList) => {
       const requestURL = AppConstant.BASE_URL + AppConstant.USER_LIST_URL;
@@ -29,11 +29,11 @@ export class UserEffects {
           payload: users
         };
       }
-  ));
+    ));
 
   @Effect({dispatch: false})
-  userAdd = this.actions$
-  .ofType(UserActions.ADD_USER).pipe(
+  userAdd = this.actions$.pipe(
+  ofType(UserActions.ADD_USER),
     map(
       (action: UserActions.AddUser) => {
         const requestURL = AppConstant.BASE_URL + AppConstant.USER_SIGNUP_URL;

@@ -4,7 +4,7 @@ import {of as observableOf,  from as fromPromise } from 'rxjs';
 import {tap, map, switchMap, share, catchError, mergeMap} from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 
 import * as AuthActions from './auth.actions';
@@ -18,8 +18,8 @@ import { MyJwt } from '../model/my-jwt.model';
 export class AuthEffects {
 
     @Effect()
-    authSignin = this.actions$
-      .ofType(AuthActions.TRY_SIGNIN).pipe(
+    authSignin = this.actions$.pipe(
+      ofType(AuthActions.TRY_SIGNIN),
       map((action: AuthActions.TrySignin) => {
         return action.payload;
       }),
@@ -57,16 +57,16 @@ export class AuthEffects {
     }), share(), );
 
     @Effect({dispatch: false})
-    authLogout = this.actions$
-        .ofType(AuthActions.LOGOUT).pipe(
+    authLogout = this.actions$.pipe(
+        ofType(AuthActions.LOGOUT),
         tap(() => {
           localStorage.clear();
           this.router.navigate(['/']);
         }));
 
     @Effect({dispatch: false})
-    authResetPassword = this.actions$
-        .ofType(AuthActions.RESET_PASSWORD).pipe(
+    authResetPassword = this.actions$.pipe(
+        ofType(AuthActions.RESET_PASSWORD),
           map((action: AuthActions.ResetPassword) => {
             return action.payload;
           }),
@@ -88,8 +88,8 @@ export class AuthEffects {
         );
 
     @Effect({dispatch: false})
-    authChangePassword = this.actions$
-            .ofType(AuthActions.CHANGE_PASSWORD).pipe(
+    authChangePassword = this.actions$.pipe(
+            ofType(AuthActions.CHANGE_PASSWORD),
               map((action: AuthActions.ChangePassword) => {
                 return action.payload;
               }),

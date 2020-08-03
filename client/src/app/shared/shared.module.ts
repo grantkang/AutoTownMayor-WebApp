@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { NgxCarouselModule } from 'ngx-carousel';
+// import { NgxCarouselModule } from 'ngx-carousel';
 
 import { MaterialModule } from './module/material.module';
 import { PipeModule } from '../pipe/pipe.module';
@@ -17,13 +17,13 @@ import { PipeModule } from '../pipe/pipe.module';
   imports: [
     FlexLayoutModule,
     MaterialModule,
-    NgxCarouselModule
+    // NgxCarouselModule
   ],
   exports: [
     CommonModule,
     FlexLayoutModule,
     MaterialModule,
-    NgxCarouselModule
+    // NgxCarouselModule
   ]
 })
 export class SharedModule {}

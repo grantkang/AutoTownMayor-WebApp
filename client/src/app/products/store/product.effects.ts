@@ -4,7 +4,7 @@ import {map, switchMap} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import * as ProductActions from './product.actions';
 import * as fromProduct from './product.reducers';
@@ -18,8 +18,8 @@ import { AppConstant } from '../../app.constant';
 export class ProductEffects {
 
   @Effect()
-  pageableProductListFetch = this.actions$
-    .ofType(ProductActions.FETCH_PAGEABLE_PRODUCT_LIST).pipe(
+  pageableProductListFetch = this.actions$.pipe(
+    ofType(ProductActions.FETCH_PAGEABLE_PRODUCT_LIST),
     switchMap((action: ProductActions.FetchPageableProductList) => {
       const pageNumber = action.payload.page.toString();
       const nameFilter = action.payload.nameFilter;
@@ -63,8 +63,8 @@ export class ProductEffects {
     );
 
   @Effect()
-  productFetchById = this.actions$
-    .ofType(ProductActions.FETCH_PRODUCT_BY_ID).pipe(
+  productFetchById = this.actions$.pipe(
+    ofType(ProductActions.FETCH_PRODUCT_BY_ID),
     switchMap((action: ProductActions.FetchPageableProductList) => {
       return this.httpClient.get<SalesItem>(AppConstant.BASE_URL + AppConstant.ITEM_URL + action.payload);
     }),

@@ -2,7 +2,7 @@
 import {map, switchMap} from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import * as ContactActions from './contact.actions';
 import { AppConstant } from '../../../app.constant';
@@ -10,8 +10,8 @@ import { AppConstant } from '../../../app.constant';
 @Injectable()
 export class ContactEffects {
   @Effect()
-  sendContactMessage = this.actions$
-    .ofType(ContactActions.SEND_CONTACT_MESSAGE).pipe(
+  sendContactMessage = this.actions$.pipe(
+    ofType(ContactActions.SEND_CONTACT_MESSAGE),
     switchMap((action: ContactActions.SendContactMessage) => {
       const res = action.payload;
       const body = JSON.stringify(res);
@@ -27,7 +27,7 @@ export class ContactEffects {
       (error) => {
         return 'error';
       }
-    ), );
+    ));
 
   constructor(private actions$: Actions,
     private http: HttpClient) {}
