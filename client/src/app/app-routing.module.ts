@@ -16,11 +16,11 @@ const routes: Routes = [
     { path: 'contact', component: ContactComponent },
     { path: 'login', component: LoginComponent },
     { path: 'passwordreset', component: ResetPasswordComponent },
-    { path: 'products', loadChildren: './products/products.module#ProductsModule' },
+    { path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) },
     { path: 'promo',  component: PromoComponent },
-    { path: 'user', loadChildren: './user/user.module#UserModule' }
+    { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule) }
   ]},
-  { path: 'admin', loadChildren: './admin/admin.module#AdminModule' }
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) }
 ];
 
 @NgModule({
