@@ -9,10 +9,10 @@ import { BulletPipe } from './bullet.pipe';
 
 export class PipeModule {
 
-  static forRoot() {
-     return {
-         ngModule: PipeModule,
-         providers: [],
-     };
-  }
+  static forRoot(): ModuleWithProviders<PipeModule> {
+    return {
+        ngModule: PipeModule,
+        providers: [],
+    };
+}
 }
