@@ -1,5 +1,5 @@
 import { SalesItem } from '../../shared/model/salesitem.model'
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 
 export class PageableProductList {
     constructor(

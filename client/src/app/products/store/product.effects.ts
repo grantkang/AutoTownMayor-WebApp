@@ -3,7 +3,7 @@ import {map, switchMap} from 'rxjs/operators';
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import * as ProductActions from './product.actions';

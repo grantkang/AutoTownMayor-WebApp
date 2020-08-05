@@ -1,4 +1,4 @@
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 
 import { SalesItem } from '../../shared/model/salesitem.model';
 import { PageableProductList } from '../product-list/product-list-pageable.model';

@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MatSnackBar } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppConstant } from '../../app.constant';
 

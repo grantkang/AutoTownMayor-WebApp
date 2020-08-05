@@ -9,7 +9,7 @@ import * as fromApp from '../../store/app.reducers';
 import * as AuthActions from '../store/auth.actions';
 import * as fromAuth from '../store/auth.reducers';
 import { AuthEffects } from '../store/auth.effects';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 // TODO: Consider creating a separate page for login
 // TODO: Not sure if AUTH_FAILED should be an action since it doesn't change the state.
